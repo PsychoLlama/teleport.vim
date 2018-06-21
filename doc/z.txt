@@ -72,7 +72,7 @@ zcd#FindMatches({search_term})                               *zcd#FindMatches()*
 <                No options are supported.
 
 ==============================================================================
-4. Changelog                                                 *further-changelog*
+4. Changelog                                                       *z-changelog*
 
 0.1.0
 Initial release
