@@ -1,8 +1,9 @@
 # z.vim
 Vim + [z](https://github.com/rupa/z) = lightning fast navigation
 
-## Purpose
+![demo: navigating the file system with z.vim](https://cdn.rawgit.com/PsychoLlama/z.vim/master/assets/demo.gif)
 
+## Purpose
 If you're reading this, you probably use [`z`](https://github.com/rupa/z)
 to jump around your file system. It's a magical experience, and probably
 one of my favorite CLI tools. If you don't use it, I highly recommend
