@@ -1,7 +1,9 @@
 # z.vim
 Vim + [z](https://github.com/rupa/z) = lightning fast navigation
 
-![demo: navigating the file system with z.vim](https://cdn.rawgit.com/PsychoLlama/z.vim/master/assets/demo.gif)
+<p align="center">
+  <img alt="demo: navigating the file system with z.vim" src="https://cdn.rawgit.com/PsychoLlama/z.vim/master/assets/demo.gif" width="500" />
+</p>
 
 ## Purpose
 If you're reading this, you probably use [`z`](https://github.com/rupa/z)
