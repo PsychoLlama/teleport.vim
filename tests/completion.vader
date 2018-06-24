@@ -1,9 +1,7 @@
 Include: setup.vader
 
 Before (stub findmatches):
-  func! zcd#FindMatches(search)
-    return [{ 'directory': a:search }, { 'directory': '/dir/second' }]
-  endfunc
+  source ./tests/autoload/zcd.vim
 
 Execute (returns a completion list):
   let actual = zcd#Completion('z', 'Z z', 2)
