@@ -132,9 +132,18 @@ func! zcd#Completion(args, command, cursor) abort
     return []
   endif
 
-  " Consider all arguments when computing suggestions.
   let l:cmd_pattern = '\v^\s*Z\s*'
   let l:search = substitute(a:command, l:cmd_pattern, '', '')
+  let l:args = split(l:search, '\v\s+')
+
+  " Vim completion only works on single arguments, not the whole
+  " command. Completing to an absolute path when there's more than
+  " one search pattern will prevent any results from showing up.
+  " For this reason, no completions are suggested unless exactly
+  " one argument is provided.
+  if len(l:args) != 1
+    return []
+  endif
 
   let l:matches = zcd#FindMatches(l:search)
   call map(l:matches, 'v:val.directory')

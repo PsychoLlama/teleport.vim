@@ -18,12 +18,10 @@ Execute (shows every result as a suggestion):
   let expected = ['dir', '/dir/second']
   AssertEqual expected, actual
 
-Execute (considers every argument in the suggestion):
+Execute (makes no suggestions when more than one arg is given):
   let actual = zcd#Completion('sub', 'Z dot sub', 9)
-  let expected = ['dot sub', '/dir/second']
-  AssertEqual expected, actual
+  AssertEqual [], actual
 
 Execute (ignores weird whitespace in commands):
   let actual = zcd#Completion('sub', '     Z      dot sub', 19)
-  let expected = ['dot sub', '/dir/second']
-  AssertEqual expected, actual
+  AssertEqual [], actual
