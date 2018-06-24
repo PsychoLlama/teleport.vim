@@ -16,7 +16,7 @@ Before (hook into script functions):
     " Get the zcd.vim script ID.
     for l:line in split(l:scriptnames, "\n")
       if l:line =~# '\Vautoload/zcd.vim' && l:line !~# 'plugged'
-        let l:SID = matchstr(l:line, '\v^\d+')
+        let l:SID = str2nr(matchstr(l:line, '\v^\s*\d+'))
         let l:zcd_file = matchstr(l:line, '\v(\~|/).*')
         return { 'SID': l:SID, 'file': expand(l:zcd_file) }
       endif
