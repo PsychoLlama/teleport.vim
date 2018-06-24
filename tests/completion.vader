@@ -1,0 +1,29 @@
+Include: setup.vader
+
+Before (stub findmatches):
+  func! zcd#FindMatches(search)
+    return [{ 'directory': a:search }, { 'directory': '/dir/second' }]
+  endfunc
+
+Execute (returns a completion list):
+  let actual = zcd#Completion('z', 'Z z', 2)
+  AssertEqual v:t_list, type(actual)
+
+Execute (returns an empty list when nothing has been typed):
+  let actual = zcd#Completion('   ', 'Z    ', 1)
+  AssertEqual [], actual
+
+Execute (shows every result as a suggestion):
+  let actual = zcd#Completion('dir', 'Z dir', 5)
+  let expected = ['dir', '/dir/second']
+  AssertEqual expected, actual
+
+Execute (considers every argument in the suggestion):
+  let actual = zcd#Completion('sub', 'Z dot sub', 9)
+  let expected = ['dot sub', '/dir/second']
+  AssertEqual expected, actual
+
+Execute (ignores weird whitespace in commands):
+  let actual = zcd#Completion('sub', '     Z      dot sub', 19)
+  let expected = ['dot sub', '/dir/second']
+  AssertEqual expected, actual

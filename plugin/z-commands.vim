@@ -10,4 +10,4 @@ func! s:RunCommand(...) abort
   return l:Zcd()
 endfunc
 
-command! -nargs=+ Z call s:RunCommand(<f-args>)
+command! -complete=customlist,zcd#Completion -nargs=+ Z call s:RunCommand(<f-args>)

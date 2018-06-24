@@ -125,3 +125,19 @@ func! zcd#(...) abort
   " Open the most probable match in the current pane.
   execute 'edit ' . fnameescape(l:matches[0].directory)
 endfunc
+
+" Command completion.
+func! zcd#Completion(args, command, cursor) abort
+  if a:args =~# '\v^\s*$'
+    return []
+  endif
+
+  " Consider all arguments when computing suggestions.
+  let l:cmd_pattern = '\v^\s*Z\s*'
+  let l:search = substitute(a:command, l:cmd_pattern, '', '')
+
+  let l:matches = zcd#FindMatches(l:search)
+  call map(l:matches, 'v:val.directory')
+
+  return l:matches
+endfunc
