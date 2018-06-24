@@ -68,20 +68,16 @@ func! s:GetSearchOutput(search) abort
   return systemlist(l:cmd)
 endfunc
 
-" Parse z.sh output into a list of possible matches.
-" Ordered descending by match probability (assumes z.sh output order).
-func! zcd#FindMatches(search) abort
-  let l:output = s:GetSearchOutput(a:search)
-
+func! s:ParseOutput(output) abort
   " z.sh probably couldn't be located.
-  if l:output is# v:null
+  if a:output is# v:null
     return v:null
   endif
 
   let l:results = []
 
   " Process the list of possible matches.
-  for l:line in reverse(l:output)
+  for l:line in reverse(a:output)
     let l:index_of_leading_slash = stridx(l:line, '/')
 
     " Parse each output line into an object.
@@ -94,6 +90,13 @@ func! zcd#FindMatches(search) abort
   endfor
 
   return l:results
+endfunc
+
+" Parse z.sh output into a list of possible matches.
+" Ordered descending by match probability (assumes z.sh output order).
+func! zcd#FindMatches(search) abort
+  let l:output = s:GetSearchOutput(a:search)
+  return s:ParseOutput(l:output)
 endfunc
 
 " Invoked by :Z ...

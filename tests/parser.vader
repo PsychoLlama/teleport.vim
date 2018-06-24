@@ -1,0 +1,29 @@
+Include: setup.vader
+
+Execute (returns a list):
+  let output = Private('ParseOutput', [])
+  AssertEqual v:t_list, type(output)
+
+Execute (parses each line into a dictionary):
+  let output = Private('ParseOutput', [
+    \   '0.12345678 /some/file',
+    \ ])
+
+  AssertEqual 1, len(output)
+
+  let expected = { 'directory': '/some/file', 'frecency': 0.12345678 }
+  AssertEqual expected, output[0]
+
+Execute (orders the output by frecency):
+  let output = Private('ParseOutput', [
+    \   '0.123      /first/file',
+    \   '0.23456789 /second/file',
+    \ ])
+
+  AssertEqual '/second/file', output[0].directory
+  AssertEqual '/first/file', output[1].directory
+
+# If the `z` executable is invalid the output is null.
+Execute (survives if there is no output):
+  let output = Private('ParseOutput', v:null)
+  AssertEqual v:null, output
