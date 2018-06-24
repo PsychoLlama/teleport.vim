@@ -1,4 +1,6 @@
 Before (hook into script functions):
+  source autoload/zcd.vim
+
   let $ZSH = ''
   if exists('g:zcd#path')
     unlet g:zcd#path
@@ -13,7 +15,7 @@ Before (hook into script functions):
 
     " Get the zcd.vim script ID.
     for l:line in split(l:scriptnames, "\n")
-      if l:line =~# '\Vautoload/zcd.vim'
+      if l:line =~# '\Vautoload/zcd.vim' && l:line !~# 'plugged'
         let l:SID = matchstr(l:line, '\v^\d+')
         let l:zcd_file = matchstr(l:line, '\v(\~|/).*')
         return { 'SID': l:SID, 'file': expand(l:zcd_file) }
