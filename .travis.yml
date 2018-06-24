@@ -1,6 +1,9 @@
 language: vim
 
 before_script:
+  - add-apt-repository ppa:jonathonf/vim
+  - apt-get update
+  - apt-get install vim
   - git clone https://github.com/junegunn/vader.vim.git
 
 script: ./ci.sh
