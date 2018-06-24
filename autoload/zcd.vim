@@ -1,6 +1,6 @@
 " Uses `z` to search for directories by 'frecency'.
 " Output is:
-" [propability]     /absolute/folder/path/
+" [frecency]     /absolute/folder/path/
 
 " Invalid g:zcd#path config.
 func! s:ErrorInvalidPathConfig() abort
