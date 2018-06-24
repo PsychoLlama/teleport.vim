@@ -8,4 +8,4 @@ filetype plugin indent on
 syntax enable
 "
 
-nvim -Nu <(echo "$vimrc") -c 'Vader! tests/*'
+vim -Nu <(echo "$vimrc") -c 'Vader! tests/*'
