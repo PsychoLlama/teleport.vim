@@ -146,6 +146,7 @@ func! zcd#Completion(args, command, cursor) abort
   endif
 
   let l:matches = zcd#FindMatches(l:search)
+  let l:matches = type(l:matches) == v:t_list ? l:matches : []
   call map(l:matches, 'v:val.directory')
 
   return l:matches
