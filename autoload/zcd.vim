@@ -78,6 +78,10 @@ func! s:ParseOutput(output) abort
 
   " Process the list of possible matches.
   for l:line in reverse(a:output)
+    if l:line =~# '\v^common:'
+      continue
+    endif
+
     let l:index_of_leading_slash = stridx(l:line, '/')
 
     " Parse each output line into an object.

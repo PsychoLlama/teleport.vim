@@ -16,14 +16,29 @@ Execute (parses each line into a dictionary):
 
 Execute (orders the output by frecency):
   let output = Private('ParseOutput', [
-    \   '0.123      /first/file',
-    \   '0.23456789 /second/file',
+    \   '0.012367   /first/file',
+    \   '0.123      /second/file',
+    \   '0.23456789 /third/file',
     \ ])
 
-  AssertEqual '/second/file', output[0].directory
-  AssertEqual '/first/file', output[1].directory
+  AssertEqual '/third/file', output[0].directory
+  AssertEqual '/second/file', output[1].directory
+  AssertEqual '/first/file', output[2].directory
 
 # If the `z` executable is invalid the output is null.
 Execute (survives if there is no output):
   let output = Private('ParseOutput', v:null)
   AssertEqual v:null, output
+
+# Sometimes the list will begin with:
+# common: /some/file/path
+# That information is already obvious from frecency.
+Execute (ignores suggestions for common directories):
+  let output = Private('ParseOutput', [
+    \   'common:    /first/file',
+    \   '0.555      /second/file',
+    \   '555.123    /first/file',
+    \ ])
+
+  AssertEqual 2, len(output)
+  AssertEqual '/first/file', output[0].directory
