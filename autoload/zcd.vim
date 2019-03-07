@@ -5,9 +5,9 @@
 " Invalid g:zcd#path config.
 func! s:ErrorInvalidPathConfig() abort
   echohl Error
-  echon 'Error(z.vim): '
+  echon 'Error(z.vim):'
   echohl None
-  echon 'Huh, the '
+  echon ' Huh, the '
   echohl String
   echon 'g:zcd#path'
   echohl None
@@ -54,6 +54,21 @@ func! s:GetPathToZ() abort
   return v:null
 endfunc
 
+" Expand special symbols like '~', `%:h`, or `$HOME`.
+func! s:ExpandSymbols(input) abort
+  return map(copy(a:input), 'expand(v:val)')
+endfunc
+
+" The user entered a single expandable variable, like '~'. Just go there.
+func! s:GetObviousDestination(input, expanded) abort
+  " See if `expand(...)` thinks the input is special.
+  if len(a:input) is# 1 && a:input[0] isnot# a:expanded[0]
+    return a:expanded[0]
+  endif
+
+  return v:null
+endfunc
+
 " Execute a shell command to find best folder matches.
 func! s:GetSearchOutput(search) abort
   let l:z_path = s:GetPathToZ()
@@ -96,6 +111,10 @@ func! s:ParseOutput(output) abort
   return l:results
 endfunc
 
+func! s:GoToDirectory(directory) abort
+  execute 'edit ' . fnameescape(a:directory)
+endfunc
+
 " Parse z.sh output into a list of possible matches.
 " Ordered descending by match probability (assumes z.sh output order).
 func! zcd#FindMatches(search) abort
@@ -105,7 +124,14 @@ endfunc
 
 " Invoked by :Z ...
 func! zcd#(...) abort
-  let l:search = join(a:000, ' ')
+  let l:expanded = s:ExpandSymbols(a:000)
+  let l:obvious_destination = s:GetObviousDestination(a:000, l:expanded)
+
+  if l:obvious_destination isnot# v:null
+    return s:GoToDirectory(l:obvious_destination)
+  endif
+
+  let l:search = join(l:expanded, ' ')
   let l:matches = zcd#FindMatches(l:search)
 
   " Error state. Assume it was already echoed.
@@ -123,7 +149,7 @@ func! zcd#(...) abort
   endif
 
   " Open the most probable match in the current pane.
-  execute 'edit ' . fnameescape(l:matches[0].directory)
+  call s:GoToDirectory(l:matches[0].directory)
 endfunc
 
 " Command completion.

@@ -77,5 +77,10 @@ zcd#FindMatches({search_term})                               *zcd#FindMatches()*
 0.1.0
 Initial release
 
+0.1.1 - March 6, 2019
+Added:
+- Expansion of special variables (e.g. `~`, `$HOME`, or `%:h`). Affects both
+  command and programmatic usage.
+
 ==============================================================================
 vim: ft=help tw=78:
