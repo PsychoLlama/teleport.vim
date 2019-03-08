@@ -55,7 +55,7 @@ Plugin 'PsychoLlama/z.vim'
 
 [**Pathogen**](https://github.com/tpope/vim-pathogen)
 ```sh
-git clone https://github.com/PsychoLlama/z.vim ~/.vim/bundle/
+git clone https://github.com/PsychoLlama/z.vim ~/.vim/bundle/z.vim
 ```
 
 ## Configuration
