@@ -72,6 +72,15 @@ let g:zcd#path = expand('~/path/to/z/z.sh')
 
 Where `~/path/to/z/z.sh` is replaced with the actual file path.
 
+In case you are using lua-based based implementation of z, 
+[it](https://github.com/skywind3000/z.lua) is also supported.
+Similarly put in your vimrc:
+
+```viml
+let g:zcd#path = expand('~/path/to/z.lua/z.lua')
+```
+
+
 ## Support
 If you run into trouble, feel free to [open an
 issue](https://github.com/PsychoLlama/z.vim/issues/new).
