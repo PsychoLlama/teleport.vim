@@ -86,8 +86,6 @@ func! s:GetSearchOutput(search) abort
     let l:cmd .= '; _z -l ' . shellescape(a:search)
   endif
 
-  echo systemlist(l:cmd)
-
   return systemlist(l:cmd)
 endfunc
 
