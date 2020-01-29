@@ -81,7 +81,7 @@ func! s:GetSearchOutput(search) abort
     let l:cmd = 'eval "$(lua '. fnameescape(l:z_path).' --init bash)"'
     let l:cmd .=';export _ZL_HYPHEN=1'
     let l:cmd .= '; _zlua -l ' . shellescape(a:search)
-  elseif l:z_path =~ 'z.sh'
+  else
     let l:cmd = 'source ' . fnameescape(l:z_path)
     let l:cmd .= '; _z -l ' . shellescape(a:search)
   endif
