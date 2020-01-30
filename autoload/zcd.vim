@@ -24,14 +24,14 @@ func! s:ErrorUnresolvablePath() abort
   echohl Error
   echon 'Error(z.vim): '
   echohl None
-  echon 'unable to locate the z.sh file.' "\n"
+  echon 'unable to locate the z file.' "\n"
   echon 'Add an exact path to your vimrc, like this:' "\n"
   echohl Comment
-  echon "\n" '  let g:zcd#path = expand(''~/path/to/z/z.sh'')' "\n"
+  echon "\n" '  let g:zcd#path = expand(''~/path/to/(z/z.sh|z.lua/z.lua)'')' "\n"
   echohl None
 endfunc
 
-" Figure out where z.sh is located.
+" Figure out where z is located.
 func! s:GetPathToZ() abort
   " Prefer the explicitly configured path if it exists.
   if exists('g:zcd#path')
@@ -76,9 +76,15 @@ func! s:GetSearchOutput(search) abort
     return v:null
   endif
 
-  " source z.sh; _z -l 'some search term'
-  let l:cmd = 'source ' . fnameescape(l:z_path)
-  let l:cmd .= '; _z -l ' . shellescape(a:search)
+  " source z.sh(z.lua); _z(_zlua) -l 'some search term'
+  if l:z_path =~ 'z.lua'
+    let l:cmd = 'eval "$(lua '. fnameescape(l:z_path).' --init bash)"'
+    let l:cmd .=';export _ZL_HYPHEN=1'
+    let l:cmd .= '; _zlua -l ' . shellescape(a:search)
+  else
+    let l:cmd = 'source ' . fnameescape(l:z_path)
+    let l:cmd .= '; _z -l ' . shellescape(a:search)
+  endif
 
   return systemlist(l:cmd)
 endfunc
