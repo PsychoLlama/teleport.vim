@@ -25,6 +25,10 @@ endfunc
 " Ordered descending by match probability (assumes z.sh output order).
 func! zcd#FindMatches(search) abort
   let l:driver = zcd#driver#load()
+  if l:driver is# v:null
+    return v:null
+  endif
+
   return l:driver.Query(a:search)
 endfunc
 
