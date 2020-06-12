@@ -5,6 +5,7 @@ endfunc
 
 let s:drivers = {}
 let s:drivers.z = zcd#drivers#rupaz#()
+let s:drivers['z.lua'] = zcd#drivers#zlua#()
 let s:drivers.zoxide = zcd#drivers#zoxide#()
 let s:drivers.test = zcd#drivers#test#()
 

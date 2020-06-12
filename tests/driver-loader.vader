@@ -5,5 +5,8 @@ Execute (loads the correct driver):
   let g:zcd#driver = 'z'
   AssertEqual zcd#drivers#rupaz#(), zcd#driver#load()
 
+  let g:zcd#driver = 'z.lua'
+  AssertEqual zcd#drivers#zlua#(), zcd#driver#load()
+
   let g:zcd#driver = 'test'
   AssertEqual zcd#drivers#test#(), zcd#driver#load()
