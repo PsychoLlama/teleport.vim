@@ -51,10 +51,8 @@ func! zcd#(...) abort
 
   " No luck. Alert the user.
   if len(l:matches) is 0
-    echohl Error
-    echon 'No matches: '
-    echohl None
-    echon l:search
+    call zcd#print#error('No matches:')
+    call zcd#print#(' ', l:search)
     return
   endif
 

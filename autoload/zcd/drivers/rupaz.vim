@@ -3,31 +3,23 @@ let s:rupaz = {}
 
 " Invalid g:zcd#path config.
 func! s:ErrorInvalidPathConfig() abort
-  echohl Error
-  echon 'Error(z.vim):'
-  echohl None
-  echon ' Huh, the '
-  echohl String
-  echon 'g:zcd#path'
-  echohl None
-  echon " variable doesn't point to a readable file." "\n"
-  echon 'Would you investigate? '
-  echon "(it's probably in your vimrc)" "\n"
-  echohl Comment
-  echon "\n" '  let g:zcd#path = ''' . g:zcd#path . "'" "\n"
-  echohl None
+  call zcd#print#error('Error:')
+  call zcd#print#(' Huh, the ')
+  call zcd#print#string('g:zcd#path')
+  call zcd#print#(" variable doesn't point to a readable file.\n")
+  call zcd#print#("Would you check your vimrc?\n")
+  call zcd#print#code("\n  let g:zcd#path = '", g:zcd#path, "'\n")
 endfunc
 
 " Can't infer the path of z.sh.
 func! s:ErrorUnresolvablePath() abort
-  echohl Error
-  echon 'Error(z.vim): '
-  echohl None
-  echon 'unable to locate the z file.' "\n"
-  echon 'Add an exact path to your vimrc, like this:' "\n"
-  echohl Comment
-  echon "\n" '  let g:zcd#path = expand(''~/path/to/(z/z.sh|z.lua/z.lua)'')' "\n"
-  echohl None
+  call zcd#print#error('Error:')
+  call zcd#print#(" Unable to locate the z program.\n")
+  call zcd#print#("Add an exact path to your vimrc, like this:\n")
+  call zcd#print#code("\n  let g:zcd#path = expand('~/path/to/z/z.sh')\n")
+  call zcd#print#("\n(reference ")
+  call zcd#print#function(':help z-config')
+  call zcd#print#(' for more details)')
 endfunc
 
 " Figure out where z is located.

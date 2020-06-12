@@ -13,6 +13,10 @@ func! zcd#print#string(...) abort
   call s:print('String', a:000)
 endfunc
 
+func! zcd#print#function(...) abort
+  call s:print('Function', a:000)
+endfunc
+
 func! zcd#print#code(...) abort
   call s:print('Comment', a:000)
 endfunc
