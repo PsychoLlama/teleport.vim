@@ -1,0 +1,12 @@
+Execute (loads the correct driver):
+  let g:zcd#driver = 'zoxide'
+  AssertEqual zcd#drivers#zoxide#(), zcd#driver#load()
+
+  let g:zcd#driver = 'test'
+  AssertEqual zcd#drivers#test#(), zcd#driver#load()
+
+Execute (infers the correct driver):
+  let g:zcd#test_driver#exists = 1
+  unlet zcd#driver
+
+  AssertEqual zcd#drivers#zoxide#(), zcd#driver#load()
