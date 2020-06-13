@@ -1,19 +1,8 @@
 " https://github.com/rupa/z
 let s:rupaz = {}
 
-" Can't infer the path of z.sh.
-func! s:ErrorUnresolvablePath() abort
-  call zcd#print#error('Error:')
-  call zcd#print#(" Unable to locate the z program.\n")
-  call zcd#print#("Add an exact path to your vimrc, like this:\n")
-  call zcd#print#code("\n  let g:zcd#path = expand('~/path/to/z/z.sh')\n")
-  call zcd#print#("\n(reference ")
-  call zcd#print#function(':help z-config')
-  call zcd#print#(' for more details)')
-endfunc
-
 " Figure out where z is located.
-func! s:GetPathToZ() abort
+func! s:resolve_executable() abort
   " Prefer the explicitly configured path if it exists.
   if exists('g:zcd#path')
     return g:zcd#path
@@ -25,37 +14,44 @@ func! s:GetPathToZ() abort
     return l:path
   endif
 
-  call s:ErrorUnresolvablePath()
   return v:null
 endfunc
 
 " Execute a shell command to find best folder matches.
-func! s:GetSearchOutput(search) abort
-  let l:z_path = s:GetPathToZ()
+func! s:get_search_output(search) abort
+  let l:z_path = s:resolve_executable()
   if l:z_path is# v:null
     return v:null
   endif
 
-  " source z.sh(z.lua); _z(_zlua) -l 'some search term'
-  if l:z_path =~# 'z.lua'
-    let l:cmd = 'eval "$(lua '. fnameescape(l:z_path).' --init bash)"'
-    let l:cmd .=';export _ZL_HYPHEN=1'
-    let l:cmd .= '; _zlua -l ' . shellescape(a:search)
-  else
-    let l:cmd = 'source ' . fnameescape(l:z_path)
-    let l:cmd .= '; _z -l ' . shellescape(a:search)
-  endif
+  " source z.sh; _z -l 'some search term'
+  let l:cmd = 'source ' . fnameescape(l:z_path)
+  let l:cmd .= '; _z -l ' . shellescape(a:search)
 
   return systemlist(l:cmd)
 endfunc
 
+" Find the executable path. If it ends in z.sh OR the driver is explicitly
+" enabled, consider it supported.
 func! s:rupaz.is_supported() abort
-  " TODO: Wire this up.
+  let l:zcd_path = s:resolve_executable()
+
+  if l:zcd_path is# v:null
+    return v:false
+  endif
+
+  let l:supported_executable = fnamemodify(l:zcd_path, ':t') is# 'z.sh'
+  let l:explicitly_enabled = get(g:, 'zcd#driver', v:null) is# 'z'
+  if l:supported_executable || l:explicitly_enabled
+    return v:true
+  endif
+
+  return v:false
 endfunc
 
 " TODO: Make this variadic.
 func! s:rupaz.query(search) abort
-  let l:output = s:GetSearchOutput(a:search)
+  let l:output = s:get_search_output(a:search)
 
   if l:output is# v:null
     return v:null
