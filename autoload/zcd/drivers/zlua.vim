@@ -1,11 +1,11 @@
 " https://github.com/skywind3000/z.lua
 let s:zlua = {}
 
-func! s:zlua.Exists() abort
+func! s:zlua.is_supported() abort
   " TODO: Wire this up.
 endfunc
 
-func! s:zlua.Query(query) abort
+func! s:zlua.query(query) abort
   " TODO
 endfunc
 

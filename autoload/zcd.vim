@@ -29,7 +29,7 @@ func! zcd#FindMatches(search) abort
     return v:null
   endif
 
-  return l:driver.Query(a:search)
+  return l:driver.query(a:search)
 endfunc
 
 " Invoked by :Z ...

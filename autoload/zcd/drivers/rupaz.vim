@@ -93,12 +93,12 @@ func! s:ParseOutput(output) abort
   return l:results
 endfunc
 
-func! s:rupaz.Exists() abort
+func! s:rupaz.is_supported() abort
   " TODO: Wire this up.
 endfunc
 
 " TODO: Make this variadic.
-func! s:rupaz.Query(search) abort
+func! s:rupaz.query(search) abort
   let l:output = s:GetSearchOutput(a:search)
   return s:ParseOutput(l:output)
 endfunc

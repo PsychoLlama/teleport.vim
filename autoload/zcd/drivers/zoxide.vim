@@ -1,11 +1,11 @@
 " https://github.com/ajeetdsouza/zoxide
 let s:zoxide = {}
 
-func! s:zoxide.Exists() abort
+func! s:zoxide.is_supported() abort
   return executable('zoxide')
 endfunc
 
-func! s:zoxide.Query(...) abort
+func! s:zoxide.query(...) abort
   let l:substrings = copy(a:000)
   call map(l:substrings, 'fnameescape(v:val)')
 

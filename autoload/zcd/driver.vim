@@ -40,7 +40,7 @@ endfunc
 
 func! s:infer_driver() abort
   for [l:driver_name, l:driver] in items(s:drivers)
-    if l:driver.Exists()
+    if l:driver.is_supported()
       return l:driver_name
     endif
   endfor
