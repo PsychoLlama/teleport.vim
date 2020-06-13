@@ -1,5 +1,5 @@
 " https://github.com/rupa/z
-let s:rupaz = {}
+let s:rupaz = { 'name': 'rupa/z' }
 
 " Figure out where z is located.
 func! s:resolve_executable() abort

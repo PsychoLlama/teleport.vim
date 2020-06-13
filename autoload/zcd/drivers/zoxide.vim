@@ -1,5 +1,5 @@
 " https://github.com/ajeetdsouza/zoxide
-let s:zoxide = {}
+let s:zoxide = { 'name': 'zoxide' }
 
 func! s:zoxide.is_supported() abort
   return executable('zoxide')

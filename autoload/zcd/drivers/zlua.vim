@@ -1,5 +1,5 @@
 " https://github.com/skywind3000/z.lua
-let s:zlua = {}
+let s:zlua = { 'name': 'z.lua' }
 
 " TODO: Move this out of drivers.
 func! s:GetPathToZ() abort
