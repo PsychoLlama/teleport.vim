@@ -1,16 +1,6 @@
 " https://github.com/rupa/z
 let s:rupaz = {}
 
-" Invalid g:zcd#path config.
-func! s:ErrorInvalidPathConfig() abort
-  call zcd#print#error('Error:')
-  call zcd#print#(' Huh, the ')
-  call zcd#print#string('g:zcd#path')
-  call zcd#print#(" variable doesn't point to a readable file.\n")
-  call zcd#print#("Would you check your vimrc?\n")
-  call zcd#print#code("\n  let g:zcd#path = '", g:zcd#path, "'\n")
-endfunc
-
 " Can't infer the path of z.sh.
 func! s:ErrorUnresolvablePath() abort
   call zcd#print#error('Error:')
@@ -26,12 +16,6 @@ endfunc
 func! s:GetPathToZ() abort
   " Prefer the explicitly configured path if it exists.
   if exists('g:zcd#path')
-    " Nope, invalid path.
-    if !filereadable(g:zcd#path)
-      call s:ErrorInvalidPathConfig()
-      return v:null
-    endif
-
     return g:zcd#path
   endif
 

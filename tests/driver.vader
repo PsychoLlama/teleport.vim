@@ -1,15 +1,25 @@
+Before (reset config):
+  unlet! zcd#path
+  unlet! zcd#driver
+
 Execute (loads the correct driver):
-  let g:zcd#driver = 'zoxide'
+  let zcd#driver = 'zoxide'
   AssertEqual zcd#drivers#zoxide#(), zcd#driver#load()
 
-  let g:zcd#driver = 'z'
+  let zcd#driver = 'z'
   AssertEqual zcd#drivers#rupaz#(), zcd#driver#load()
 
-  let g:zcd#driver = 'z.lua'
+  let zcd#driver = 'z.lua'
   AssertEqual zcd#drivers#zlua#(), zcd#driver#load()
 
-  let g:zcd#driver = 'test'
+  let zcd#driver = 'test'
   AssertEqual zcd#drivers#test#(), zcd#driver#load()
 
-  let g:zcd#driver = 'invalid'
+  let zcd#driver = 'invalid'
+  silent AssertEqual v:null, zcd#driver#load()
+
+Execute (returns null if the path is invalid):
+  let zcd#path = 'invalid'
+  let zcd#driver = 'test'
+
   silent AssertEqual v:null, zcd#driver#load()

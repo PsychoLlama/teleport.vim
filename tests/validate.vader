@@ -3,6 +3,9 @@ Before (reset drivers):
   let drivers.zoxide = { 'mock': 'zoxide driver' }
   let drivers['z.lua'] = { 'mock': 'z.lua driver' }
 
+  unlet! g:zcd#path
+  unlet! g:zcd#driver
+
 Execute (returns the driver):
   let zcd#driver = 'zoxide'
   AssertEqual 'zoxide', zcd#validate#driver(drivers)
@@ -14,3 +17,14 @@ Execute (returns null if the driver is invalid):
 Execute (returns null if the driver is null):
   let zcd#driver = v:null
   AssertEqual v:null, zcd#validate#driver(drivers)
+
+Execute (returns null if the path is unset):
+  AssertEqual v:null, zcd#validate#path()
+
+Execute (returns the path if it's readable):
+  let zcd#path = expand('%:p:h') . '/README.md'
+  AssertEqual zcd#path, zcd#validate#path()
+
+Execute (returns null if the path is invalid):
+  let zcd#path = expand('%:p:h')
+  silent AssertEqual v:null, zcd#validate#path()
