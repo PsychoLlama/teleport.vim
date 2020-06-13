@@ -1,16 +1,16 @@
 Execute (returns a list):
   let output = zcd#parse_output#z([])
-  AssertEqual v:t_list, type(output)
+  silent AssertEqual v:t_list, type(output)
 
 Execute (parses each line into a dictionary):
   let output = zcd#parse_output#z([
     \   '0.12345678 /some/file'
     \ ])
 
-  AssertEqual 1, len(output)
+  silent AssertEqual 1, len(output)
 
   let expected = { 'directory': '/some/file', 'frecency': 0.12345678 }
-  AssertEqual expected, output[0]
+  silent AssertEqual expected, output[0]
 
 Execute (orders the output by frecency):
   let output = zcd#parse_output#z([
@@ -19,9 +19,9 @@ Execute (orders the output by frecency):
     \   '0.23456789 /third/file',
     \ ])
 
-  AssertEqual '/third/file', output[0].directory
-  AssertEqual '/second/file', output[1].directory
-  AssertEqual '/first/file', output[2].directory
+  silent AssertEqual '/third/file', output[0].directory
+  silent AssertEqual '/second/file', output[1].directory
+  silent AssertEqual '/first/file', output[2].directory
 
 # Sometimes the list will begin with:
 # common: /some/file/path
@@ -33,5 +33,5 @@ Execute (ignores suggestions for common directories):
     \   '555.123    /first/file',
     \ ])
 
-  AssertEqual 2, len(output)
-  AssertEqual '/first/file', output[0].directory
+  silent AssertEqual 2, len(output)
+  silent AssertEqual '/first/file', output[0].directory

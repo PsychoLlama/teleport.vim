@@ -1,3 +1,7 @@
+Before:
+  let zcd#driver = 'test'
+  let zcd#test_driver#is_supported = v:true
+
 " TODO: Fix failing tests.
 Execute (returns a completion list):
   let actual = zcd#Completion('z', 'Z z', 2)

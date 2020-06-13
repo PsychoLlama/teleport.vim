@@ -2,7 +2,7 @@
 let s:test = {}
 
 func! s:test.is_supported() abort
-  return get(g:, 'zcd#test_driver#exists', 0)
+  return get(g:, 'zcd#test_driver#is_supported', v:false)
 endfunc
 
 func! s:test.query(...) abort

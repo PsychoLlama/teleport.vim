@@ -1,5 +1,6 @@
 Before (use test driver):
-  let g:zcd#driver = 'test'
+  let zcd#driver = 'test'
+  let zcd#test_driver#is_supported = v:true
 
 Execute (returns the results from the corresponding driver):
   let result1 = { 'frecency': 1, 'directory': '/dir1' }

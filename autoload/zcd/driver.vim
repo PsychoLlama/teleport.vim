@@ -20,10 +20,14 @@ func! s:get_driver_setting() abort
 
   " Null if the user hasn't explicitly set it.
   if l:driver isnot# v:null
-    return l:driver
+    return zcd#validate#support(l:driver, s:drivers)
   endif
 
-  " Return the first compatible driver.
+  return s:infer_driver()
+endfunc
+
+" Return the first compatible driver.
+func! s:infer_driver() abort
   for [l:driver_name, l:driver] in items(s:drivers)
     if l:driver.is_supported()
       return l:driver_name

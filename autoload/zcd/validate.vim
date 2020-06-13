@@ -52,3 +52,27 @@ func! s:report_invalid_driver(driver, drivers) abort
 
   return 'ERROR'
 endfunc
+
+" Edge case: driver was hard-coded but isn't supported.
+func! zcd#validate#support(driver_name, drivers) abort
+  let l:driver = a:drivers[a:driver_name]
+
+  if !l:driver.is_supported()
+    return s:report_unsupported_driver(a:driver_name)
+  endif
+
+  return a:driver_name
+endfunc
+
+func! s:report_unsupported_driver(driver_name) abort
+  call zcd#print#error('Error:')
+  call zcd#print#(" you've hard-coded ")
+  call zcd#print#string(a:driver_name)
+  call zcd#print#(" as your driver, but z.vim can't use it.\n")
+  call zcd#print#('See ')
+  call zcd#print#function(':help z-config')
+  call zcd#print#(' for details on configuring a driver.', "\n")
+  call zcd#print#code("\n  let zcd#driver = '", a:driver_name, "'\n")
+
+  return v:null
+endfunc
