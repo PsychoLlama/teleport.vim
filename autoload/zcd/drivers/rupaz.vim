@@ -65,34 +65,6 @@ func! s:GetSearchOutput(search) abort
   return systemlist(l:cmd)
 endfunc
 
-func! s:ParseOutput(output) abort
-  " z.sh probably couldn't be located.
-  if a:output is# v:null
-    return v:null
-  endif
-
-  let l:results = []
-
-  " Process the list of possible matches.
-  for l:line in reverse(a:output)
-    if l:line =~# '\v^common:'
-      continue
-    endif
-
-    let l:index_of_leading_slash = stridx(l:line, '/')
-
-    " Parse each output line into an object.
-    let l:result = {}
-    let l:result.directory = l:line[(l:index_of_leading_slash):]
-    let l:result.frecency = l:line[0:(l:index_of_leading_slash - 1)]
-    let l:result.frecency = str2float(l:result.frecency)
-
-    call add(l:results, l:result)
-  endfor
-
-  return l:results
-endfunc
-
 func! s:rupaz.is_supported() abort
   " TODO: Wire this up.
 endfunc
@@ -100,7 +72,12 @@ endfunc
 " TODO: Make this variadic.
 func! s:rupaz.query(search) abort
   let l:output = s:GetSearchOutput(a:search)
-  return s:ParseOutput(l:output)
+
+  if l:output is# v:null
+    return v:null
+  endif
+
+  return zcd#parse_output#z(l:output)
 endfunc
 
 func! zcd#drivers#rupaz#() abort

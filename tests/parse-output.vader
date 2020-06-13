@@ -1,12 +1,10 @@
-Include: setup.vader
-
 Execute (returns a list):
-  let output = Private('ParseOutput', [])
+  let output = zcd#parse_output#z([])
   AssertEqual v:t_list, type(output)
 
 Execute (parses each line into a dictionary):
-  let output = Private('ParseOutput', [
-    \   '0.12345678 /some/file',
+  let output = zcd#parse_output#z([
+    \   '0.12345678 /some/file'
     \ ])
 
   AssertEqual 1, len(output)
@@ -15,7 +13,7 @@ Execute (parses each line into a dictionary):
   AssertEqual expected, output[0]
 
 Execute (orders the output by frecency):
-  let output = Private('ParseOutput', [
+  let output = zcd#parse_output#z([
     \   '0.012367   /first/file',
     \   '0.123      /second/file',
     \   '0.23456789 /third/file',
@@ -25,16 +23,11 @@ Execute (orders the output by frecency):
   AssertEqual '/second/file', output[1].directory
   AssertEqual '/first/file', output[2].directory
 
-# If the `z` executable is invalid the output is null.
-Execute (survives if there is no output):
-  let output = Private('ParseOutput', v:null)
-  AssertEqual v:null, output
-
 # Sometimes the list will begin with:
 # common: /some/file/path
 # That information is already obvious from frecency.
 Execute (ignores suggestions for common directories):
-  let output = Private('ParseOutput', [
+  let output = zcd#parse_output#z( [
     \   'common:    /first/file',
     \   '0.555      /second/file',
     \   '555.123    /first/file',
