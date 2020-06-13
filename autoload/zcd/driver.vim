@@ -34,5 +34,14 @@ func! s:infer_driver() abort
     endif
   endfor
 
-  return v:null
+  " We can't find a compatible driver. We have no method of querying.
+  return s:admit_failure()
+endfunc
+
+func! s:admit_failure() abort
+  call zcd#print#error('Error:')
+  call zcd#print#(" Can't find a compatible driver.\n")
+  call zcd#print#("You'll need to tell z.vim what program to use. See ")
+  call zcd#print#function(':help z-config')
+  call zcd#print#(' for instructions.')
 endfunc

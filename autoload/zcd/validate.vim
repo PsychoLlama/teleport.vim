@@ -44,7 +44,7 @@ func! s:report_invalid_driver(driver, drivers) abort
   call map(l:options, '"''" . v:val . "''"')
 
   call zcd#print#error('Error:')
-  call zcd#print#(' the ')
+  call zcd#print#(' The ')
   call zcd#print#string('g:zcd#driver')
   call zcd#print#(" variable is invalid.\n\n")
   call zcd#print#code("  let g:zcd#driver = '", a:driver, "'")
@@ -66,7 +66,7 @@ endfunc
 
 func! s:report_unsupported_driver(driver_name) abort
   call zcd#print#error('Error:')
-  call zcd#print#(" you've hard-coded ")
+  call zcd#print#(" You've hard-coded ")
   call zcd#print#string(a:driver_name)
   call zcd#print#(" as your driver, but z.vim can't use it.\n")
   call zcd#print#('See ')
