@@ -1,8 +1,4 @@
-Include: setup.vader
-
-Before (stub findmatches):
-  source ./tests/autoload/zcd.vim
-
+" TODO: Fix failing tests.
 Execute (returns a completion list):
   let actual = zcd#Completion('z', 'Z z', 2)
   AssertEqual v:t_list, type(actual)
