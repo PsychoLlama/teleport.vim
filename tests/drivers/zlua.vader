@@ -1,0 +1,11 @@
+Execute (infers support from executable file name):
+  let driver = zcd#drivers#zlua#()
+
+  let zcd#path = 'ends/in/z.lua'
+  AssertEqual v:true, driver.is_supported()
+
+  let zcd#path = 'ends/in/z.sh'
+  AssertEqual v:false, driver.is_supported()
+
+  unlet zcd#path
+  AssertEqual v:false, driver.is_supported()
