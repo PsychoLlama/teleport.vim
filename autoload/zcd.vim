@@ -2,12 +2,12 @@
 " Output is:
 " [frecency]     /absolute/folder/path/
 
-func! s:GoToDirectory(directory) abort
+func! s:go_to_directory(directory) abort
   execute 'edit ' . fnameescape(a:directory)
 endfunc
 
 " The user entered a single expandable variable, like '~'. Just go there.
-func! s:GetObviousDestination(input, expanded) abort
+func! s:get_obvious_destination(input, expanded) abort
   " See if `expand(...)` thinks the input is special.
   if len(a:input) is# 1 && a:input[0] isnot# a:expanded[0]
     return a:expanded[0]
@@ -17,7 +17,7 @@ func! s:GetObviousDestination(input, expanded) abort
 endfunc
 
 " Expand special symbols like '~', `%:h`, or `$HOME`.
-func! s:ExpandSymbols(input) abort
+func! s:expand_symbols(input) abort
   return map(copy(a:input), 'expand(v:val)')
 endfunc
 
@@ -34,11 +34,11 @@ endfunc
 
 " Invoked by :Z ...
 func! zcd#(...) abort
-  let l:expanded = s:ExpandSymbols(a:000)
-  let l:obvious_destination = s:GetObviousDestination(a:000, l:expanded)
+  let l:expanded = s:expand_symbols(a:000)
+  let l:obvious_destination = s:get_obvious_destination(a:000, l:expanded)
 
   if l:obvious_destination isnot# v:null
-    return s:GoToDirectory(l:obvious_destination)
+    return s:go_to_directory(l:obvious_destination)
   endif
 
   let l:search = join(l:expanded, ' ')
@@ -57,7 +57,7 @@ func! zcd#(...) abort
   endif
 
   " Open the most probable match in the current pane.
-  call s:GoToDirectory(l:matches[0].directory)
+  call s:go_to_directory(l:matches[0].directory)
 endfunc
 
 " Command completion.

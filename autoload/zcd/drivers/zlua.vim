@@ -1,17 +1,9 @@
 " https://github.com/skywind3000/z.lua
 let s:zlua = { 'name': 'z.lua' }
 
-" TODO: Move this out of drivers.
-func! s:GetPathToZ() abort
-  return get(g:, 'zcd#path', v:null)
-endfunc
-
 " Execute a shell command to find best folder matches.
-func! s:GetSearchOutput(search) abort
-  let l:z_path = s:GetPathToZ()
-  if l:z_path is# v:null
-    return v:null
-  endif
+func! s:get_search_output(search) abort
+  let l:z_path = g:zcd#path
 
   " env _ZL_HYPHEN=1 /path/to/z.lua -l 'some search term'
   let l:cmd = 'env _ZL_HYPHEN=1 ' . fnameescape(l:z_path)
@@ -22,7 +14,7 @@ endfunc
 
 " This driver is used if the executable path ends in `z.lua`.
 func! s:zlua.is_supported() abort
-  if !has_key(g:, 'zcd#path')
+  if !exists('g:zcd#path')
     return v:false
   endif
 
@@ -34,7 +26,7 @@ func! s:zlua.is_supported() abort
 endfunc
 
 func! s:zlua.query(search) abort
-  let l:output = s:GetSearchOutput(a:search)
+  let l:output = s:get_search_output(a:search)
   if l:output is# v:null
     return v:null
   endif
