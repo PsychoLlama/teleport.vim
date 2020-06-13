@@ -10,3 +10,6 @@ Execute (loads the correct driver):
 
   let g:zcd#driver = 'test'
   AssertEqual zcd#drivers#test#(), zcd#driver#load()
+
+  let g:zcd#driver = 'invalid'
+  silent AssertEqual v:null, zcd#driver#load()
