@@ -2,7 +2,6 @@ z-changelog	z.txt	/*z-changelog*
 z-config	z.txt	/*z-config*
 z-functions	z.txt	/*z-functions*
 z-overview	z.txt	/*z-overview*
-z-toc	z.txt	/*z-toc*
 z.lua	z.txt	/*z.lua*
 z.sh	z.txt	/*z.sh*
 z.vim	z.txt	/*z.vim*
@@ -10,4 +9,6 @@ zcd#FindMatches()	z.txt	/*zcd#FindMatches()*
 zcd#api#find_match()	z.txt	/*zcd#api#find_match()*
 zcd#api#find_matches()	z.txt	/*zcd#api#find_matches()*
 zcd#api#query()	z.txt	/*zcd#api#query()*
+zcd#driver	z.txt	/*zcd#driver*
+zcd#path	z.txt	/*zcd#path*
 zoxide	z.txt	/*zoxide*
