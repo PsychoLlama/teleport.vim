@@ -1,1 +1,1 @@
-command! -complete=customlist,zcd#Completion -nargs=+ Z call zcd#(<f-args>)
+command! -complete=customlist,zcd#completion# -nargs=+ Z call zcd#(<f-args>)
