@@ -1,3 +1,7 @@
+" Sample output:
+" 0.5        /absolute/directory/path/oldest
+" 12         /absolute/directory/path/newer
+" 40         /absolute/directory/path/newest
 func! zcd#parse_output#z(output) abort
   let l:results = []
 
