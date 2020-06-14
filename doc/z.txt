@@ -1,9 +1,9 @@
-*z.vim*     Teleport around your filesystem, but, like... in vim.
+*z.vim*     Teleport around your filesystem
 
 Author:   Jesse Gibson <JesseTheGibson@gmail.com>
 Homepage: https://github.com/PsychoLlama/z.vim
 License:  MIT
-Tags:     *z* *z.sh*
+Tags:     *z.sh* *zoxide* *z.lua*
 
 ==============================================================================
 CONTENTS                                                                 *z-toc*
@@ -64,12 +64,40 @@ use in other scripts & commands.
 
 zcd#FindMatches({search_term})                               *zcd#FindMatches()*
 
+                DEPRECATED: use `zcd#api#find_matches(...)` instead.
+
+zcd#api#find_matches({search_term})                     *zcd#api#find_matches()*
+
                 Returns a list of directories matching {search_term}. Each
                 result is a dictionary containing metadata: >
 
                   [{ 'frecency': 3.75, 'directory': '/absolute/path/' }]
 
-<                No options are supported.
+<                Results are ordered descending by likelyhood (most likely
+                comes first).
+
+                WARNING: if the driver is misconfigured, the method will
+                print a warning and return `'ERROR'`. If you'd prefer to hide
+                the error output, use |:silent|.
+
+                Added in v0.2.0.
+
+zcd#api#find_match({search_term})                         *zcd#api#find_match()*
+
+                Returns the first match from |zcd#api#find_matches()|. If
+                there aren't any matches, it returns `v:null`.
+
+                Added in v0.2.0.
+
+zcd#api#query({search_term})                                   *zcd#api#query()*
+
+                Behaves the same as |zcd#api#find_match()| unless you pass
+                a well-known symbol (e.g. `~` or `%:h`), in which case it
+                expands without consulting the driver. This method is closest
+                to the `:Z` command. It may change to include new behaviors in
+                the future.
+
+                Added in v0.2.0.
 
 ==============================================================================
 4. Changelog                                                       *z-changelog*
@@ -85,6 +113,18 @@ Added:
 0.2.0 - Jan 30, 2020
 Added:
 - Support for z.lua (thanks @kuator!)
+
+0.3.0 - UNRELEASED
+Added:
+- Support for zoxide (https://github.com/ajeetdsouza/zoxide).
+- First-class support for z.lua (https://github.com/skywind3000/z.lua).
+- Improved error reporting.
+- API methods `zcd#api#find_match(...)`, `zcd#api#find_matches(...)`, and
+  `zcd#api#query(...)`.
+- The |zcd#driver| option.
+
+Deprecated:
+- `zcd#FindMatches(...)` has been replaced by `zcd#api#find_matches(...)`.
 
 ==============================================================================
 vim: ft=help tw=78:
