@@ -3,7 +3,7 @@ Before:
   unlet! zcd#path
   unlet! $ZSH
 
-  let fixtures = simplify(finddir('z.vim', '.;') . '/fixtures')
+  let fixtures = simplify(finddir('teleport.vim', '.;') . '/fixtures')
 
 Execute (automatic resolution to OMZ framework):
   AssertEqual v:false, zcd#drivers#rupaz#().is_supported()

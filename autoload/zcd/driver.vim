@@ -41,7 +41,7 @@ endfunc
 func! s:admit_failure() abort
   call zcd#print#error('Error:')
   call zcd#print#(" Can't find a compatible driver.\n")
-  call zcd#print#("You'll need to tell z.vim what program to use. See ")
-  call zcd#print#function(':help z-config')
+  call zcd#print#("You'll need to tell teleport.vim what program to use. See ")
+  call zcd#print#function(':help teleport-config')
   call zcd#print#(' for instructions.')
 endfunc
