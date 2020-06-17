@@ -139,7 +139,7 @@ Added:
 Added:
 - Support for z.lua (thanks @kuator!)
 
-0.3.0 - UNRELEASED~
+0.3.0 - June 16, 2020~
 
 Added:
 - Support for zoxide (https://github.com/ajeetdsouza/zoxide).
