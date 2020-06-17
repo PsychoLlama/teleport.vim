@@ -2,7 +2,7 @@ Before (reset config):
   unlet! zcd#path
   unlet! zcd#driver
 
-  let zcd#test_driver#is_supported = v:true
+  let teleport#test_driver#is_supported = v:true
 
 Execute (loads the correct driver):
   let zcd#driver = 'test'
@@ -19,6 +19,6 @@ Execute (returns null if the path is invalid):
 
 Execute (returns null if the driver is unsupported):
   let zcd#driver = 'test'
-  let zcd#test_driver#is_supported = v:false
+  let teleport#test_driver#is_supported = v:false
 
   silent AssertEqual v:null, teleport#driver#load()

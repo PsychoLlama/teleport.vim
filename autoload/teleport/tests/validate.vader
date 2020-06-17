@@ -3,7 +3,7 @@ Before (reset drivers):
   let drivers.zoxide = { 'mock': 'zoxide driver' }
   let drivers['z.lua'] = { 'mock': 'z.lua driver' }
   let drivers.test = teleport#drivers#test#()
-  let zcd#test_driver#is_supported = v:true
+  let teleport#test_driver#is_supported = v:true
 
   unlet! zcd#path
   unlet! zcd#driver
@@ -35,9 +35,9 @@ Execute (returns null if the path is invalid):
 
 " --- support ---
 Execute (returns the driver when supported):
-  let zcd#test_driver#is_supported = v:true
+  let teleport#test_driver#is_supported = v:true
   AssertEqual 'test', teleport#validate#support('test', drivers)
 
 Execute (returns null when the driver is not supported):
-  let zcd#test_driver#is_supported = v:false
+  let teleport#test_driver#is_supported = v:false
   silent AssertEqual v:null, teleport#validate#support('test', drivers)
