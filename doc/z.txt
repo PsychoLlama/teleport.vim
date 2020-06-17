@@ -81,6 +81,9 @@ FUNCTIONS                                                          *z-functions*
 This might appeal to advanced vim users. `z.vim` exposes a function you can
 use in other scripts & commands.
 
+WAIT! Don't use these yet. There's a non-zero chance I'll rename the plugin
+shortly and these API methods along with it. Bear with me.
+
 zcd#FindMatches({search_term})                               *zcd#FindMatches()*
 
                 DEPRECATED: use `zcd#api#find_matches(...)` instead.
