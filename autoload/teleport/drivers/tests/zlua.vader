@@ -1,11 +1,11 @@
 Execute (infers support from executable file name):
-  let driver = zcd#drivers#zlua#()
+  let driver = teleport#drivers#zlua#()
 
-  let zcd#path = 'ends/in/z.lua'
+  let teleport#path = 'ends/in/z.lua'
   AssertEqual v:true, driver.is_supported()
 
-  let zcd#path = 'ends/in/z.sh'
+  let teleport#path = 'ends/in/z.sh'
   AssertEqual v:false, driver.is_supported()
 
-  unlet zcd#path
+  unlet teleport#path
   AssertEqual v:false, driver.is_supported()

@@ -1,5 +1,5 @@
 " Completion for the `:Z ...` command.
-func! zcd#completion#(args, command, cursor) abort
+func! teleport#completion#(args, command, cursor) abort
   if a:args =~# '\v^\s*$'
     return []
   endif
@@ -17,7 +17,7 @@ func! zcd#completion#(args, command, cursor) abort
     return []
   endif
 
-  let l:matches = zcd#api#find_matches(l:search)
+  let l:matches = teleport#api#find_matches(l:search)
   let l:matches = type(l:matches) == v:t_list ? l:matches : []
   call map(l:matches, 'v:val.directory')
 

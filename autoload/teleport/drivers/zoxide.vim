@@ -19,6 +19,6 @@ func! s:zoxide.query(...) abort
   return [{ 'frecency': -1, 'directory': l:result }]
 endfunc
 
-func! zcd#drivers#zoxide#() abort
+func! teleport#drivers#zoxide#() abort
   return deepcopy(s:zoxide)
 endfunc

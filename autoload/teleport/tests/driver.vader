@@ -1,0 +1,24 @@
+Before (reset config):
+  unlet! teleport#path
+  unlet! teleport#driver
+
+  let teleport#test_driver#is_supported = v:true
+
+Execute (loads the correct driver):
+  let teleport#driver = 'test'
+  AssertEqual teleport#drivers#test#(), teleport#driver#load()
+
+  let teleport#driver = 'invalid'
+  silent AssertEqual v:null, teleport#driver#load()
+
+Execute (returns null if the path is invalid):
+  let teleport#path = 'invalid'
+  let teleport#driver = 'test'
+
+  silent AssertEqual v:null, teleport#driver#load()
+
+Execute (returns null if the driver is unsupported):
+  let teleport#driver = 'test'
+  let teleport#test_driver#is_supported = v:false
+
+  silent AssertEqual v:null, teleport#driver#load()

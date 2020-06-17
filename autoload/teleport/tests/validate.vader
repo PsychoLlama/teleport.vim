@@ -1,0 +1,48 @@
+Before (reset drivers):
+  let drivers = {}
+  let drivers.zoxide = { 'mock': 'zoxide driver' }
+  let drivers['z.lua'] = { 'mock': 'z.lua driver' }
+  let drivers.test = teleport#drivers#test#()
+  let teleport#test_driver#is_supported = v:true
+
+  unlet! teleport#path
+  unlet! zcd#path
+  unlet! teleport#driver
+
+" --- driver ---
+Execute (returns the driver):
+  let teleport#driver = 'zoxide'
+  AssertEqual 'zoxide', teleport#validate#driver(drivers)
+
+Execute (returns null if the driver is invalid):
+  let teleport#driver = 'bacon'
+  silent AssertEqual 'ERROR', teleport#validate#driver(drivers)
+
+Execute (returns null if the driver is null):
+  let teleport#driver = v:null
+  AssertEqual v:null, teleport#validate#driver(drivers)
+
+" --- path ---
+Execute (returns null if the path is unset):
+  AssertEqual v:null, teleport#validate#path()
+
+Execute (returns the path if it's readable):
+  let teleport#path = expand('%:p:h') . '/README.md'
+  AssertEqual teleport#path, teleport#validate#path()
+
+Execute (returns null if using a deprecated variable name):
+  let zcd#path = expand('%:p:h') . '/README.md'
+  silent AssertEqual 'ERROR', teleport#validate#path()
+
+Execute (returns null if the path is invalid):
+  let teleport#path = expand('%:p:h')
+  silent AssertEqual 'ERROR', teleport#validate#path()
+
+" --- support ---
+Execute (returns the driver when supported):
+  let teleport#test_driver#is_supported = v:true
+  AssertEqual 'test', teleport#validate#support('test', drivers)
+
+Execute (returns null when the driver is not supported):
+  let teleport#test_driver#is_supported = v:false
+  silent AssertEqual v:null, teleport#validate#support('test', drivers)

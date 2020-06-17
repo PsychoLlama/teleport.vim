@@ -4,8 +4,8 @@ let s:rupaz = { 'name': 'rupa/z' }
 " Figure out where z is located.
 func! s:resolve_executable() abort
   " Prefer the explicitly configured path if it exists.
-  if exists('g:zcd#path')
-    return g:zcd#path
+  if exists('g:teleport#path')
+    return g:teleport#path
   endif
 
   " Fall back to the oh-my-zsh framework.
@@ -34,14 +34,14 @@ endfunc
 " Find the executable path. If it ends in z.sh OR the driver is explicitly
 " enabled, consider it supported.
 func! s:rupaz.is_supported() abort
-  let l:zcd_path = s:resolve_executable()
+  let l:teleport_path = s:resolve_executable()
 
-  if l:zcd_path is# v:null
+  if l:teleport_path is# v:null
     return v:false
   endif
 
-  let l:supported_executable = fnamemodify(l:zcd_path, ':t') is# 'z.sh'
-  let l:explicitly_enabled = get(g:, 'zcd#driver', v:null) is# 'z'
+  let l:supported_executable = fnamemodify(l:teleport_path, ':t') is# 'z.sh'
+  let l:explicitly_enabled = get(g:, 'teleport#driver', v:null) is# 'z'
   if l:supported_executable || l:explicitly_enabled
     return v:true
   endif
@@ -57,9 +57,9 @@ func! s:rupaz.query(search) abort
     return v:null
   endif
 
-  return zcd#parse_output#z(l:output)
+  return teleport#parse_output#z(l:output)
 endfunc
 
-func! zcd#drivers#rupaz#() abort
+func! teleport#drivers#rupaz#() abort
   return deepcopy(s:rupaz)
 endfunc

@@ -1,0 +1,25 @@
+Before:
+  unlet! teleport#driver
+  unlet! teleport#path
+  unlet! $ZSH
+
+  let fixtures = simplify(finddir('teleport.vim', '.;') . '/fixtures')
+
+Execute (automatic resolution to OMZ framework):
+  AssertEqual v:false, teleport#drivers#rupaz#().is_supported()
+
+  let $ZSH = fixtures . '/omz'
+  AssertEqual v:true, teleport#drivers#rupaz#().is_supported()
+
+Execute (inferrence of support by file name of the executable):
+  let teleport#path = fixtures . '/omz/plugins/z/z.sh'
+  AssertEqual v:true, teleport#drivers#rupaz#().is_supported()
+
+  let teleport#path = '/fake/path/to/z.lua'
+  AssertEqual v:false, teleport#drivers#rupaz#().is_supported()
+
+Execute (forcibly enabling the driver with unrecognized executable):
+  let teleport#path = '/fake/path/to/z.lua'
+  let teleport#driver = 'z'
+
+  AssertEqual v:true, teleport#drivers#rupaz#().is_supported()
