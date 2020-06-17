@@ -2,7 +2,7 @@
 Vim + [z](https://github.com/rupa/z) = lightning fast navigation
 
 <p align="center">
-  <img alt="demo: navigating the file system with teleport.vim" src="https://cdn.rawgit.com/PsychoLlama/teleport.vim/master/assets/demo.gif" width="500" />
+  <img alt="demo: navigating the file system with teleport.vim" src="https://raw.githubusercontent.com/PsychoLlama/teleport.vim/master/assets/demo.gif" width="500" />
 </p>
 
 ## Purpose
