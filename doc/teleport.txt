@@ -148,7 +148,7 @@ Added:
 Deprecated:
 - `zcd#FindMatches(...)` has been replaced by `zcd#api#find_matches(...)`.
 
-0.4.0 - UNRELEASED~
+0.4.0 - June 16, 2020~
 
 Changed:
 - Renamed the plugin from `z.vim` to `teleport.vim`.
