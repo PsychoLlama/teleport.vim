@@ -14,5 +14,17 @@ func! teleport#(...) abort
   endif
 
   " Open the most probable match in the current pane.
-  execute 'edit ' . fnameescape(l:match)
+  call s:go_to_directory(l:match)
+endfunc
+
+func! s:go_to_directory(directory) abort
+  let l:target = fnameescape(a:directory)
+  let l:auto_lcd = get(g:, 'teleport#update_cwd', v:false)
+
+  execute 'edit ' . l:target
+
+  " Automatically set the window-relative current working directory.
+  if l:auto_lcd && getcwd() isnot# simplify(a:directory)
+    execute 'lcd ' . l:target
+  endif
 endfunc
