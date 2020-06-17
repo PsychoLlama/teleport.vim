@@ -34,14 +34,6 @@ whatever directory browser you've got configured.
   because it's awesome. This should work for NERDTree too, but I never test
   against it.
 
-## Documentation
-In traditional vim fashion, the documentation is kept in a help page.
-After installing the plugin run
-
-```viml
-:help z.vim
-```
-
 ## Installation
 [**vim-plug**](https://github.com/junegunn/vim-plug)
 ```viml
@@ -58,8 +50,10 @@ Plugin 'PsychoLlama/z.vim'
 git clone https://github.com/PsychoLlama/z.vim ~/.vim/bundle/z.vim
 ```
 
-## Configuration
+## Integrations
+`z.vim` is compatible with several different implementations.
 
+### [rupa/z](https://github.com/rupa/z)
 If you use the [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
 framework, `z.vim` will work out of the box. You're good to go :rocket:
 
@@ -67,20 +61,43 @@ If not, you'll need to explicitly provide a path to your
 [z](https://github.com/rupa/z) installation. Add this to your vimrc:
 
 ```viml
-let g:zcd#path = expand('~/path/to/z/z.sh')
+let zcd#path = expand('~/path/to/z/z.sh')
 ```
 
 Where `~/path/to/z/z.sh` is replaced with the actual file path.
 
-In case you are using lua-based based implementation of z, 
-[it](https://github.com/skywind3000/z.lua) is also supported.
-Similarly put in your vimrc:
+### [z.lua](https://github.com/skywind3000/z.lua)
+There's also a lua-based implementation of `z`. Configuration is nearly
+identical. Just put this in your vimrc:
 
 ```viml
-let g:zcd#path = expand('~/path/to/z.lua/z.lua')
+let zcd#path = expand('~/path/to/z.lua/z.lua')
 ```
 
+Where `~/path/to/z.lua/z.lua` is the actual file path, wherever you installed
+it.
 
-## Support
-If you run into trouble, feel free to [open an
-issue](https://github.com/PsychoLlama/z.vim/issues/new).
+### [zoxide](https://github.com/ajeetdsouza/zoxide)
+Zoxide is automatically detected - you don't have to do anything.
+
+### Setting the integration
+If you have more than one of these installed (why???) there's a chance `z.vim`
+could choose the wrong one. You can force it to use a particular driver by
+setting `zcd#driver`.
+
+```viml
+let zcd#driver = 'z' " rupa/z
+let zcd#driver = 'z.lua' " skywind3000/z.lua
+let zcd#driver = 'zoxide' " ajeetdsouza/zoxide
+```
+
+If you don't see your favorite program listed here, feel free to [open
+a request!](https://github.com/PsychoLlama/z.vim/issues/new?title=%5BRequest%5D%20New%20Integration&body=Can%20haz%20%3Cplugin%3E%20integration%3F)
+
+## Documentation
+In traditional vim fashion, the documentation is kept in a help page.
+After installing the plugin, run:
+
+```viml
+:help z.vim
+```
