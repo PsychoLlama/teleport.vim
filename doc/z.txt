@@ -82,5 +82,9 @@ Added:
 - Expansion of special variables (e.g. `~`, `$HOME`, or `%:h`). Affects both
   command and programmatic usage.
 
+0.2.0 - Jan 30, 2020
+Added:
+- Support for z.lua (thanks @kuator!)
+
 ==============================================================================
 vim: ft=help tw=78:
