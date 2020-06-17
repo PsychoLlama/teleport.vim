@@ -173,7 +173,7 @@ Changed:
 - Renamed `zcd#path` to |teleport#path| with a hard error.
 - Renamed `zcd#driver` to |teleport#driver|.
 
-0.5.0 - UNRELEASED~
+0.5.0 - June 16, 2020~
 
 Added:
 - New |teleport#update_cwd| option.
