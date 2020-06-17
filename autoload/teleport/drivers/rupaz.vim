@@ -41,7 +41,7 @@ func! s:rupaz.is_supported() abort
   endif
 
   let l:supported_executable = fnamemodify(l:teleport_path, ':t') is# 'z.sh'
-  let l:explicitly_enabled = get(g:, 'zcd#driver', v:null) is# 'z'
+  let l:explicitly_enabled = get(g:, 'teleport#driver', v:null) is# 'z'
   if l:supported_executable || l:explicitly_enabled
     return v:true
   endif

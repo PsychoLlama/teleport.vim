@@ -48,12 +48,12 @@ First find the file path of the executable, then copy it into your vimrc: >
 teleport.vim should be able to infer the driver from that alone. You're done!
 
 Configuring the driver~
-                                                                    *zcd#driver*
+                                                               *teleport#driver*
 
 If teleport.vim wasn't able to infer the driver, or it inferred the wrong
 driver, you can force it to use a specific implementation: >
 
-  let zcd#driver = 'zoxide'
+  let teleport#driver = 'zoxide'
 <
 These are your options:
 - `z`
@@ -63,17 +63,17 @@ These are your options:
 rupa/z~
 >
   let teleport#path = expand('~/path/to/z/z.sh')
-  let zcd#driver = 'z' " Optional
+  let teleport#driver = 'z' " Optional
 <
 z.lua~
 >
   let teleport#path = expand('~/path/to/z.lua/z.lua')
-  let zcd#driver = 'z.lua' " Optional
+  let teleport#driver = 'z.lua' " Optional
 <
 zoxide~
 >
   " Uses the global command "zoxide".
-  let zcd#driver = 'zoxide'
+  let teleport#driver = 'zoxide'
 <
 ==============================================================================
 FUNCTIONS                                                   *teleport-functions*
@@ -143,7 +143,7 @@ Added:
 - Improved error reporting.
 - API methods `zcd#api#find_match(...)`, `zcd#api#find_matches(...)`, and
   `zcd#api#query(...)`.
-- The |zcd#driver| option.
+- The `zcd#driver` option (renamed immediately after).
 
 Deprecated:
 - `zcd#FindMatches(...)` has been replaced by `zcd#api#find_matches(...)`.
@@ -153,6 +153,8 @@ Deprecated:
 Changed:
 - Renamed the plugin from `z.vim` to `teleport.vim`.
 - Moved `zcd#` functions to the `teleport#` namespace.
+- Renamed `zcd#path` to |teleport#path| with a hard error.
+- Renamed `zcd#driver` to |teleport#driver|.
 
 ==============================================================================
 vim: ft=help tw=78:

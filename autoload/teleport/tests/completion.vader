@@ -1,5 +1,5 @@
 Before:
-  let zcd#driver = 'test'
+  let teleport#driver = 'test'
   let teleport#test_driver#is_supported = v:true
   let teleport#test_driver#results = []
 

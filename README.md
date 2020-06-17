@@ -83,12 +83,12 @@ Zoxide is automatically detected - you don't have to do anything.
 ### Setting the integration
 If you have more than one of these installed (why???) there's a chance
 `teleport.vim` could choose the wrong one. You can force it to use
-a particular driver by setting `zcd#driver`.
+a particular driver by setting `teleport#driver`.
 
 ```viml
-let zcd#driver = 'z' " rupa/z
-let zcd#driver = 'z.lua' " skywind3000/z.lua
-let zcd#driver = 'zoxide' " ajeetdsouza/zoxide
+let teleport#driver = 'z' " rupa/z
+let teleport#driver = 'z.lua' " skywind3000/z.lua
+let teleport#driver = 'zoxide' " ajeetdsouza/zoxide
 ```
 
 If you don't see your favorite program listed here, feel free to [open

@@ -7,19 +7,19 @@ Before (reset drivers):
 
   unlet! teleport#path
   unlet! zcd#path
-  unlet! zcd#driver
+  unlet! teleport#driver
 
 " --- driver ---
 Execute (returns the driver):
-  let zcd#driver = 'zoxide'
+  let teleport#driver = 'zoxide'
   AssertEqual 'zoxide', teleport#validate#driver(drivers)
 
 Execute (returns null if the driver is invalid):
-  let zcd#driver = 'bacon'
+  let teleport#driver = 'bacon'
   silent AssertEqual 'ERROR', teleport#validate#driver(drivers)
 
 Execute (returns null if the driver is null):
-  let zcd#driver = v:null
+  let teleport#driver = v:null
   AssertEqual v:null, teleport#validate#driver(drivers)
 
 " --- path ---

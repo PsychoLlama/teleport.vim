@@ -1,6 +1,6 @@
 Before:
   unlet! teleport#path
-  let zcd#driver = 'test'
+  let teleport#driver = 'test'
   let teleport#test_driver#is_supported = v:true
   let teleport#test_driver#results = []
   let $HOME = '/homeless-shelter'
@@ -11,7 +11,7 @@ Execute (return all results from driver):
   AssertEqual teleport#test_driver#results, teleport#api#find_matches('search-term')
 
 Execute (returns an error when the driver is null):
-  let zcd#driver = 'invalid'
+  let teleport#driver = 'invalid'
   silent AssertEqual 'ERROR', teleport#api#find_matches('search-term')
 
 Execute (return first item on single query):
@@ -42,5 +42,5 @@ Execute (no explosion with empty search term):
   AssertEqual result.directory, teleport#api#query('')
 
 Execute (return an error indicator when the driver is invalid):
-  let zcd#driver = 'invalid'
+  let teleport#driver = 'invalid'
   silent AssertEqual 'ERROR', teleport#api#query('search-term')

@@ -31,17 +31,17 @@ endfunc
 func! s:report_invalid_path(path) abort
   call teleport#print#error('Error:')
   call teleport#print#(' Huh, the ')
-  call teleport#print#string('g:teleport#path')
+  call teleport#print#string('teleport#path')
   call teleport#print#(" variable doesn't point to a readable file.\n")
   call teleport#print#("Would you check your vimrc?\n")
-  call teleport#print#code("\n  let g:teleport#path = '", g:teleport#path, "'\n")
+  call teleport#print#code("\n  let teleport#path = '", g:teleport#path, "'\n")
 
   return 'ERROR'
 endfunc
 
-" --- zcd#driver ---
+" --- teleport#driver ---
 func! teleport#validate#driver(drivers) abort
-  let l:driver = get(g:, 'zcd#driver', v:null)
+  let l:driver = get(g:, 'teleport#driver', v:null)
 
   if has_key(a:drivers, l:driver)
     return l:driver
@@ -61,9 +61,9 @@ func! s:report_invalid_driver(driver, drivers) abort
 
   call teleport#print#error('Error:')
   call teleport#print#(' The ')
-  call teleport#print#string('g:zcd#driver')
+  call teleport#print#string('teleport#driver')
   call teleport#print#(" variable is invalid.\n\n")
-  call teleport#print#code("  let g:zcd#driver = '", a:driver, "'")
+  call teleport#print#code("  let teleport#driver = '", a:driver, "'")
   call teleport#print#("\n\nAvailable drivers are: ", join(l:options, ', '))
 
   return 'ERROR'
@@ -88,7 +88,7 @@ func! s:report_unsupported_driver(driver_name) abort
   call teleport#print#('See ')
   call teleport#print#function(':help teleport-config')
   call teleport#print#(' for details on configuring a driver.', "\n")
-  call teleport#print#code("\n  let zcd#driver = '", a:driver_name, "'\n")
+  call teleport#print#code("\n  let teleport#driver = '", a:driver_name, "'\n")
 
   return v:null
 endfunc

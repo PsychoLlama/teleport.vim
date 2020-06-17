@@ -1,5 +1,5 @@
 Before:
-  unlet! zcd#driver
+  unlet! teleport#driver
   unlet! teleport#path
   unlet! $ZSH
 
@@ -20,6 +20,6 @@ Execute (inferrence of support by file name of the executable):
 
 Execute (forcibly enabling the driver with unrecognized executable):
   let teleport#path = '/fake/path/to/z.lua'
-  let zcd#driver = 'z'
+  let teleport#driver = 'z'
 
   AssertEqual v:true, teleport#drivers#rupaz#().is_supported()
