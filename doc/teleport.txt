@@ -1,16 +1,16 @@
-*z.vim*          Teleport around your filesystem
+*teleport.vim*   Navigate your file system faster
 
 Author:        Jesse Gibson <JesseTheGibson@gmail.com>
-Homepage:      https://github.com/PsychoLlama/z.vim
+Homepage:      https://github.com/PsychoLlama/teleport.vim
 License:       MIT
-Tags:          *z.sh* *zoxide* *z.lua*
+Tags:          *z.sh* *zoxide* *z.lua* *z.vim* (old plugin name)
 
 
     Press `gO` to show a table of contents.
 
 
 ==============================================================================
-OVERVIEW                                                            *z-overview*
+OVERVIEW                                                     *teleport-overview*
 
 If you're using this plugin, chances are you've installed one of these tools:
 
@@ -21,14 +21,14 @@ If you're using this plugin, chances are you've installed one of these tools:
 They all do pretty much the same thing: they learn your most common
 directories, and when given a pattern, they jump to the most likely match.
 
-`z.vim` does the same thing, but in your favorite editor. Try it! >
+`teleport.vim` does the same thing, but in your favorite editor. Try it! >
 
   :Z {directory_substring}
 <
 neat.
 
 ==============================================================================
-CONFIG                                                                *z-config*
+CONFIG                                                         *teleport-config*
 
 Under the hood this just calls through to a shell program. It tries to be
 clever and infer the location where possible, but it doesn't always have
@@ -45,13 +45,13 @@ First find the file path of the executable, then copy it into your vimrc: >
 
   let zcd#path = expand('~/path/to/z/z.sh')
 <
-z.vim should be able to infer the driver from that alone. You're done!
+teleport.vim should be able to infer the driver from that alone. You're done!
 
 Configuring the driver~
                                                                     *zcd#driver*
 
-If z.vim wasn't able to infer the driver, or it inferred the wrong driver, you
-can force it to use a specific implementation: >
+If teleport.vim wasn't able to infer the driver, or it inferred the wrong
+driver, you can force it to use a specific implementation: >
 
   let zcd#driver = 'zoxide'
 <
@@ -76,13 +76,10 @@ zoxide~
   let zcd#driver = 'zoxide'
 <
 ==============================================================================
-FUNCTIONS                                                          *z-functions*
+FUNCTIONS                                                   *teleport-functions*
 
-This might appeal to advanced vim users. `z.vim` exposes a function you can
-use in other scripts & commands.
-
-WAIT! Don't use these yet. There's a non-zero chance I'll rename the plugin
-shortly and these API methods along with it. Bear with me.
+This might appeal to advanced vim users. `teleport.vim` exposes functions you
+can use in your own scripts.
 
 zcd#FindMatches({search_term})                               *zcd#FindMatches()*
 
@@ -122,7 +119,7 @@ zcd#api#query({search_term})                                   *zcd#api#query()*
                 Added in v0.2.0.
 
 ==============================================================================
-CHANGELOG                                                          *z-changelog*
+CHANGELOG                                                   *teleport-changelog*
 
 0.1.0~
 
@@ -150,6 +147,12 @@ Added:
 
 Deprecated:
 - `zcd#FindMatches(...)` has been replaced by `zcd#api#find_matches(...)`.
+
+0.4.0 - UNRELEASED~
+
+Changed:
+- Renamed the plugin from `z.vim` to `teleport.vim`.
+- Moved `zcd#` functions to the `teleport#` namespace.
 
 ==============================================================================
 vim: ft=help tw=78:
