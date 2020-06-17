@@ -1,9 +1,9 @@
 Execute (returns a list):
-  let output = zcd#parse_output#z([])
+  let output = teleport#parse_output#z([])
   silent AssertEqual v:t_list, type(output)
 
 Execute (parses each line into a dictionary):
-  let output = zcd#parse_output#z([
+  let output = teleport#parse_output#z([
     \   '0.12345678 /some/file'
     \ ])
 
@@ -13,7 +13,7 @@ Execute (parses each line into a dictionary):
   silent AssertEqual expected, output[0]
 
 Execute (orders the output by frecency):
-  let output = zcd#parse_output#z([
+  let output = teleport#parse_output#z([
     \   '0.012367   /first/file',
     \   '0.123      /second/file',
     \   '0.23456789 /third/file',
@@ -27,7 +27,7 @@ Execute (orders the output by frecency):
 # common: /some/file/path
 # That information is already obvious from frecency.
 Execute (ignores suggestions for common directories):
-  let output = zcd#parse_output#z( [
+  let output = teleport#parse_output#z( [
     \   'common:    /first/file',
     \   '0.555      /second/file',
     \   '555.123    /first/file',

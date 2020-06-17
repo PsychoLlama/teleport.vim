@@ -1,5 +1,5 @@
 Execute (infers support from executable file name):
-  let driver = zcd#drivers#zlua#()
+  let driver = teleport#drivers#zlua#()
 
   let zcd#path = 'ends/in/z.lua'
   AssertEqual v:true, driver.is_supported()

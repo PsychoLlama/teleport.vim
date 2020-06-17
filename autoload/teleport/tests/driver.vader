@@ -6,19 +6,19 @@ Before (reset config):
 
 Execute (loads the correct driver):
   let zcd#driver = 'test'
-  AssertEqual zcd#drivers#test#(), zcd#driver#load()
+  AssertEqual teleport#drivers#test#(), teleport#driver#load()
 
   let zcd#driver = 'invalid'
-  silent AssertEqual v:null, zcd#driver#load()
+  silent AssertEqual v:null, teleport#driver#load()
 
 Execute (returns null if the path is invalid):
   let zcd#path = 'invalid'
   let zcd#driver = 'test'
 
-  silent AssertEqual v:null, zcd#driver#load()
+  silent AssertEqual v:null, teleport#driver#load()
 
 Execute (returns null if the driver is unsupported):
   let zcd#driver = 'test'
   let zcd#test_driver#is_supported = v:false
 
-  silent AssertEqual v:null, zcd#driver#load()
+  silent AssertEqual v:null, teleport#driver#load()

@@ -57,9 +57,9 @@ func! s:rupaz.query(search) abort
     return v:null
   endif
 
-  return zcd#parse_output#z(l:output)
+  return teleport#parse_output#z(l:output)
 endfunc
 
-func! zcd#drivers#rupaz#() abort
+func! teleport#drivers#rupaz#() abort
   return deepcopy(s:rupaz)
 endfunc

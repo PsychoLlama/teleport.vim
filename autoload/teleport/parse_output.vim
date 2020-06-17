@@ -2,7 +2,7 @@
 " 0.5        /absolute/directory/path/oldest
 " 12         /absolute/directory/path/newer
 " 40         /absolute/directory/path/newest
-func! zcd#parse_output#z(output) abort
+func! teleport#parse_output#z(output) abort
   let l:results = []
 
   " Process the list of possible matches.
@@ -27,6 +27,6 @@ endfunc
 
 " Both rupa/z and z.lua emit nearly identical output. At the moment, the
 " parser can be shared between both implementations.
-func! zcd#parse_output#zlua(output) abort
-  return zcd#parse_output#z(a:output)
+func! teleport#parse_output#zlua(output) abort
+  return teleport#parse_output#z(a:output)
 endfunc

@@ -9,6 +9,6 @@ func! s:test.query(...) abort
   return get(g:, 'zcd#test_driver#results', [])
 endfunc
 
-func! zcd#drivers#test#() abort
+func! teleport#drivers#test#() abort
   return deepcopy(s:test)
 endfunc

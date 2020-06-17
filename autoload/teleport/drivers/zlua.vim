@@ -31,9 +31,9 @@ func! s:zlua.query(search) abort
     return v:null
   endif
 
-  return zcd#parse_output#zlua(l:output)
+  return teleport#parse_output#zlua(l:output)
 endfunc
 
-func! zcd#drivers#zlua#() abort
+func! teleport#drivers#zlua#() abort
   return deepcopy(s:zlua)
 endfunc
