@@ -1,90 +1,155 @@
-*z.vim*     Teleport around your filesystem, but, like... in vim.
+*z.vim*          Teleport around your filesystem
 
-Author:   Jesse Gibson <JesseTheGibson@gmail.com>
-Homepage: https://github.com/PsychoLlama/z.vim
-License:  MIT
-Tags:     *z* *z.sh*
+Author:        Jesse Gibson <JesseTheGibson@gmail.com>
+Homepage:      https://github.com/PsychoLlama/z.vim
+License:       MIT
+Tags:          *z.sh* *zoxide* *z.lua*
 
-==============================================================================
-CONTENTS                                                                 *z-toc*
 
-  1. Overview                                                       |z-overview|
-  2. Config                                                           |z-config|
-  3. Functions                                                     |z-functions|
-  4. Changelog                                                     |z-changelog|
+    Press `gO` to show a table of contents.
+
 
 ==============================================================================
-1. Overview                                                         *z-overview*
+OVERVIEW                                                            *z-overview*
 
-If you're reading this, you probably use `z` to jump around your file system.
-It's a magical experience, and probably one of my favorite CLI tools. If you
-don't use it, I highly recommend checking it out, even without this plugin:
-https://github.com/rupa/z
+If you're using this plugin, chances are you've installed one of these tools:
 
-It's a critical part of my CLI workflow, and I wanted that same magic for vim.
+- https://github.com/rupa/z
+- https://github.com/skywind3000/z.lua
+- https://github.com/ajeetdsouza/zoxide
 
-Say you've got a project named `drone-security-guard/`. Normally to reach this
-project you'd write >
+They all do pretty much the same thing: they learn your most common
+directories, and when given a pattern, they jump to the most likely match.
 
-  $ z drone
+`z.vim` does the same thing, but in your favorite editor. Try it! >
 
-and it figures out what you mean and jumps into the directory. This plugin
-works much the same: >
-
-  :Z drone
-
-The command above will open the `drone-security-guard/` directory using
-whatever directory browser you've got configured.
-
-Note: I use netrw for navigation because it's awesome. This should work for
-NERDTree too, but I never test against it.
-
-Pro tip: if you've got two folders with ambiguous names, you can pass more
-words to trim down the results. This works for both the CLI and vim plugin. >
-  $ z drone guard
-  :Z drone guard
+  :Z {directory_substring}
+<
+neat.
 
 ==============================================================================
-2. Config                                                             *z-config*
+CONFIG                                                                *z-config*
 
-Under the hood this just calls through to `z`, so (naturally) it requires `z`
-to be installed somewhere. `z.vim` tries to be clever and can infer the
-location if you're using the oh-my-zsh framework. Otherwise, you'll need to
-provide the full path to the `z` library.
+Under the hood this just calls through to a shell program. It tries to be
+clever and infer the location where possible, but it doesn't always have
+enough information. You might need to configure it manually.
 
-Configure this path by setting the `g:zcd#path` variable in your vimrc: >
+There are two bits of configuration:
+- The file path of the executable program
+- Which driver to use
 
-  let g:zcd#path = expand('~/path/to/z/z.sh')
+Setting the executable path~
+                                                                      *zcd#path*
 
+First find the file path of the executable, then copy it into your vimrc: >
+
+  let zcd#path = expand('~/path/to/z/z.sh')
+<
+z.vim should be able to infer the driver from that alone. You're done!
+
+Configuring the driver~
+                                                                    *zcd#driver*
+
+If z.vim wasn't able to infer the driver, or it inferred the wrong driver, you
+can force it to use a specific implementation: >
+
+  let zcd#driver = 'zoxide'
+<
+These are your options:
+- `z`
+- `z.lua`
+- `zoxide`
+
+rupa/z~
+>
+  let zcd#path = expand('~/path/to/z/z.sh')
+  let zcd#driver = 'z' " Optional
+<
+z.lua~
+>
+  let zcd#path = expand('~/path/to/z.lua/z.lua')
+  let zcd#driver = 'z.lua' " Optional
+<
+zoxide~
+>
+  " Uses the global command "zoxide".
+  let zcd#driver = 'zoxide'
+<
 ==============================================================================
-3. Functions                                                       *z-functions*
+FUNCTIONS                                                          *z-functions*
 
 This might appeal to advanced vim users. `z.vim` exposes a function you can
 use in other scripts & commands.
 
+WAIT! Don't use these yet. There's a non-zero chance I'll rename the plugin
+shortly and these API methods along with it. Bear with me.
+
 zcd#FindMatches({search_term})                               *zcd#FindMatches()*
+
+                DEPRECATED: use `zcd#api#find_matches(...)` instead.
+
+zcd#api#find_matches({search_term})                     *zcd#api#find_matches()*
 
                 Returns a list of directories matching {search_term}. Each
                 result is a dictionary containing metadata: >
 
                   [{ 'frecency': 3.75, 'directory': '/absolute/path/' }]
 
-<                No options are supported.
+<                Results are ordered descending by likelyhood (most likely
+                comes first).
+
+                WARNING: if the driver is misconfigured, the method will
+                print a warning and return `'ERROR'`. If you'd prefer to hide
+                the error output, use |:silent|.
+
+                Added in v0.2.0.
+
+zcd#api#find_match({search_term})                         *zcd#api#find_match()*
+
+                Returns the first match from |zcd#api#find_matches()|. If
+                there aren't any matches, it returns `v:null`.
+
+                Added in v0.2.0.
+
+zcd#api#query({search_term})                                   *zcd#api#query()*
+
+                Behaves the same as |zcd#api#find_match()| unless you pass
+                a well-known symbol (e.g. `~` or `%:h`), in which case it
+                expands without consulting the driver. This method is closest
+                to the `:Z` command. It may change to include new behaviors in
+                the future.
+
+                Added in v0.2.0.
 
 ==============================================================================
-4. Changelog                                                       *z-changelog*
+CHANGELOG                                                          *z-changelog*
 
-0.1.0
-Initial release
+0.1.0~
 
-0.1.1 - March 6, 2019
+Initial release.
+
+0.1.1 - March 6, 2019~
+
 Added:
 - Expansion of special variables (e.g. `~`, `$HOME`, or `%:h`). Affects both
   command and programmatic usage.
 
-0.2.0 - Jan 30, 2020
+0.2.0 - Jan 30, 2020~
+
 Added:
 - Support for z.lua (thanks @kuator!)
+
+0.3.0 - UNRELEASED~
+
+Added:
+- Support for zoxide (https://github.com/ajeetdsouza/zoxide).
+- Improved error reporting.
+- API methods `zcd#api#find_match(...)`, `zcd#api#find_matches(...)`, and
+  `zcd#api#query(...)`.
+- The |zcd#driver| option.
+
+Deprecated:
+- `zcd#FindMatches(...)` has been replaced by `zcd#api#find_matches(...)`.
 
 ==============================================================================
 vim: ft=help tw=78:

@@ -1,0 +1,28 @@
+Before:
+  let zcd#driver = 'test'
+  let zcd#test_driver#is_supported = v:true
+  let zcd#test_driver#results = []
+
+Execute (returns a completion list):
+  let actual = zcd#completion#('z', 'Z z', 2)
+  AssertEqual v:t_list, type(actual)
+
+Execute (returns an empty list when nothing has been typed):
+  let result = { 'directory': '/dir1', 'frecency': 1 }
+  let zcd#test_driver#results = [result]
+
+  AssertEqual [], zcd#completion#('   ', 'Z    ', 1)
+
+Execute (shows every result as a suggestion):
+  let result1 = { 'directory': 'dir', 'frecency': 2 }
+  let result2 = { 'directory': '/dir/second', 'frecency': 1 }
+  let zcd#test_driver#results = [result1, result2]
+
+  let expected = [result1.directory, result2.directory]
+  AssertEqual expected, zcd#completion#('dir', 'Z dir', 5)
+
+Execute (makes no suggestions when more than one arg is given):
+  let result = { 'directory': '/dir', 'frecency': 1 }
+  let zcd#test_driver#results = [result]
+
+  AssertEqual [], zcd#completion#('sub', 'Z dot sub', 9)

@@ -1,0 +1,46 @@
+Before:
+  unlet! zcd#path
+  let zcd#driver = 'test'
+  let zcd#test_driver#is_supported = v:true
+  let zcd#test_driver#results = []
+  let $HOME = '/homeless-shelter'
+
+Execute (return all results from driver):
+  let result = { 'directory': '/result-1', 'frecency': 6 }
+  let zcd#test_driver#results = [result]
+  AssertEqual zcd#test_driver#results, zcd#api#find_matches('search-term')
+
+Execute (returns an error when the driver is null):
+  let zcd#driver = 'invalid'
+  silent AssertEqual 'ERROR', zcd#api#find_matches('search-term')
+
+Execute (return first item on single query):
+  let more_frequent = { 'directory': '/more', 'frecency': 2 }
+  let less_frequent = { 'directory': '/less', 'frecency': 1 }
+  let zcd#test_driver#results = [more_frequent, less_frequent]
+  AssertEqual more_frequent, zcd#api#find_match('search-term')
+
+Execute (return null when no matches on single query):
+  let zcd#test_driver#results = []
+  AssertEqual v:null, zcd#api#find_match('search-term')
+
+Execute (treat well-known symbols specially):
+  AssertEqual $HOME, zcd#api#query('~')
+  AssertEqual expand('%:h'), zcd#api#query('%:h')
+
+Execute (return first result on directory query):
+  let result = { 'directory': '/dir', 'frecency': 1 }
+  let zcd#test_driver#results = [result]
+  AssertEqual result.directory, zcd#api#query('search-term')
+
+Execute (resolve special symbols with odd whitespace):
+  AssertEqual $HOME, zcd#api#query("\n\t ~ \t\n")
+
+Execute (no explosion with empty search term):
+  let result = { 'directory': '/dir', 'frecency': 1 }
+  let zcd#test_driver#results = [result]
+  AssertEqual result.directory, zcd#api#query('')
+
+Execute (return an error indicator when the driver is invalid):
+  let zcd#driver = 'invalid'
+  silent AssertEqual 'ERROR', zcd#api#query('search-term')

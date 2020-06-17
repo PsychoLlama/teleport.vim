@@ -1,0 +1,24 @@
+Before (reset config):
+  unlet! zcd#path
+  unlet! zcd#driver
+
+  let zcd#test_driver#is_supported = v:true
+
+Execute (loads the correct driver):
+  let zcd#driver = 'test'
+  AssertEqual zcd#drivers#test#(), zcd#driver#load()
+
+  let zcd#driver = 'invalid'
+  silent AssertEqual v:null, zcd#driver#load()
+
+Execute (returns null if the path is invalid):
+  let zcd#path = 'invalid'
+  let zcd#driver = 'test'
+
+  silent AssertEqual v:null, zcd#driver#load()
+
+Execute (returns null if the driver is unsupported):
+  let zcd#driver = 'test'
+  let zcd#test_driver#is_supported = v:false
+
+  silent AssertEqual v:null, zcd#driver#load()
