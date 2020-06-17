@@ -19,7 +19,7 @@ endfunc
 
 func! s:go_to_directory(directory) abort
   let l:target = fnameescape(a:directory)
-  let l:auto_lcd = get(g:, 'teleport#set_cwd', v:false)
+  let l:auto_lcd = get(g:, 'teleport#update_cwd', v:false)
 
   execute 'edit ' . l:target
 

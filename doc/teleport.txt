@@ -81,14 +81,14 @@ OPTIONS                                                       *teleport-options*
 `teleport.vim` has optional features you can toggle. Try 'em out.
 
 Setting the current working directory~
-                                                              *teleport#set_cwd*
+                                                           *teleport#update_cwd*
 
 Setting this variable to |v:true| will change your current working directory
 automatically after navigation, but only for your current window (it won't
 affect other panes or tabs). This option is great when paired with |:grep| or
 fuzzy finders. >
 
-  let teleport#set_cwd = v:true
+  let teleport#update_cwd = v:true
 <
 The behavior is opt-in.
 
@@ -176,7 +176,7 @@ Changed:
 0.5.0 - UNRELEASED~
 
 Added:
-- New |teleport#set_cwd| option.
+- New |teleport#update_cwd| option.
 
 ==============================================================================
 vim: ft=help tw=78:
