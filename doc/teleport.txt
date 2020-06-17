@@ -83,9 +83,9 @@ can use in your own scripts.
 
 zcd#FindMatches({search_term})                               *zcd#FindMatches()*
 
-                DEPRECATED: use `zcd#api#find_matches(...)` instead.
+                DEPRECATED: use `teleport#api#find_matches(...)` instead.
 
-zcd#api#find_matches({search_term})                     *zcd#api#find_matches()*
+teleport#api#find_matches({search_term})           *teleport#api#find_matches()*
 
                 Returns a list of directories matching {search_term}. Each
                 result is a dictionary containing metadata: >
@@ -99,24 +99,24 @@ zcd#api#find_matches({search_term})                     *zcd#api#find_matches()*
                 print a warning and return `'ERROR'`. If you'd prefer to hide
                 the error output, use |:silent|.
 
-                Added in v0.2.0.
+                Added in v0.3.0.
 
-zcd#api#find_match({search_term})                         *zcd#api#find_match()*
+teleport#api#find_match({search_term})               *teleport#api#find_match()*
 
-                Returns the first match from |zcd#api#find_matches()|. If
+                Returns the first match from |teleport#api#find_matches()|. If
                 there aren't any matches, it returns `v:null`.
 
-                Added in v0.2.0.
+                Added in v0.3.0.
 
-zcd#api#query({search_term})                                   *zcd#api#query()*
+teleport#api#query({search_term})                         *teleport#api#query()*
 
-                Behaves the same as |zcd#api#find_match()| unless you pass
-                a well-known symbol (e.g. `~` or `%:h`), in which case it
+                Behaves the same as |teleport#api#find_match()| unless you
+                pass a well-known symbol (e.g. `~` or `%:h`), in which case it
                 expands without consulting the driver. This method is closest
                 to the `:Z` command. It may change to include new behaviors in
                 the future.
 
-                Added in v0.2.0.
+                Added in v0.3.0.
 
 ==============================================================================
 CHANGELOG                                                   *teleport-changelog*
