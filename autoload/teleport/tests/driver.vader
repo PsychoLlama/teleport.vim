@@ -1,5 +1,5 @@
 Before (reset config):
-  unlet! zcd#path
+  unlet! teleport#path
   unlet! zcd#driver
 
   let teleport#test_driver#is_supported = v:true
@@ -12,7 +12,7 @@ Execute (loads the correct driver):
   silent AssertEqual v:null, teleport#driver#load()
 
 Execute (returns null if the path is invalid):
-  let zcd#path = 'invalid'
+  let teleport#path = 'invalid'
   let zcd#driver = 'test'
 
   silent AssertEqual v:null, teleport#driver#load()

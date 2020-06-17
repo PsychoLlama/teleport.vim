@@ -1,6 +1,10 @@
-" --- zcd#path ---
+" --- teleport#path ---
 func! teleport#validate#path() abort
-  let l:path = get(g:, 'zcd#path', v:null)
+  if exists('g:zcd#path')
+    return s:report_deprecated_path()
+  endif
+
+  let l:path = get(g:, 'teleport#path', v:null)
   if l:path is# v:null
     return v:null
   endif
@@ -12,13 +16,25 @@ func! teleport#validate#path() abort
   return l:path
 endfunc
 
+func! s:report_deprecated_path() abort
+  call teleport#print#error('Error:')
+  call teleport#print#(' The ')
+  call teleport#print#function('zcd#path')
+  call teleport#print#(' option is no longer supported. Use ')
+  call teleport#print#function('teleport#path')
+  call teleport#print#(' instead.')
+  call teleport#print#code("\n\n  let teleport#path = '", g:zcd#path, "'\n")
+
+  return 'ERROR'
+endfunc
+
 func! s:report_invalid_path(path) abort
   call teleport#print#error('Error:')
   call teleport#print#(' Huh, the ')
-  call teleport#print#string('g:zcd#path')
+  call teleport#print#string('g:teleport#path')
   call teleport#print#(" variable doesn't point to a readable file.\n")
   call teleport#print#("Would you check your vimrc?\n")
-  call teleport#print#code("\n  let g:zcd#path = '", g:zcd#path, "'\n")
+  call teleport#print#code("\n  let g:teleport#path = '", g:teleport#path, "'\n")
 
   return 'ERROR'
 endfunc

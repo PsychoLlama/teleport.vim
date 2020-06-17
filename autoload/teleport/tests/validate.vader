@@ -5,6 +5,7 @@ Before (reset drivers):
   let drivers.test = teleport#drivers#test#()
   let teleport#test_driver#is_supported = v:true
 
+  unlet! teleport#path
   unlet! zcd#path
   unlet! zcd#driver
 
@@ -26,11 +27,15 @@ Execute (returns null if the path is unset):
   AssertEqual v:null, teleport#validate#path()
 
 Execute (returns the path if it's readable):
+  let teleport#path = expand('%:p:h') . '/README.md'
+  AssertEqual teleport#path, teleport#validate#path()
+
+Execute (returns null if using a deprecated variable name):
   let zcd#path = expand('%:p:h') . '/README.md'
-  AssertEqual zcd#path, teleport#validate#path()
+  silent AssertEqual 'ERROR', teleport#validate#path()
 
 Execute (returns null if the path is invalid):
-  let zcd#path = expand('%:p:h')
+  let teleport#path = expand('%:p:h')
   silent AssertEqual 'ERROR', teleport#validate#path()
 
 " --- support ---

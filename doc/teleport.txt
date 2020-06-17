@@ -39,11 +39,11 @@ There are two bits of configuration:
 - Which driver to use
 
 Setting the executable path~
-                                                                      *zcd#path*
+                                                                 *teleport#path*
 
 First find the file path of the executable, then copy it into your vimrc: >
 
-  let zcd#path = expand('~/path/to/z/z.sh')
+  let teleport#path = expand('~/path/to/z/z.sh')
 <
 teleport.vim should be able to infer the driver from that alone. You're done!
 
@@ -62,12 +62,12 @@ These are your options:
 
 rupa/z~
 >
-  let zcd#path = expand('~/path/to/z/z.sh')
+  let teleport#path = expand('~/path/to/z/z.sh')
   let zcd#driver = 'z' " Optional
 <
 z.lua~
 >
-  let zcd#path = expand('~/path/to/z.lua/z.lua')
+  let teleport#path = expand('~/path/to/z.lua/z.lua')
   let zcd#driver = 'z.lua' " Optional
 <
 zoxide~

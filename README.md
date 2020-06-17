@@ -61,7 +61,7 @@ If not, you'll need to explicitly provide a path to your
 [z](https://github.com/rupa/z) installation. Add this to your vimrc:
 
 ```viml
-let zcd#path = expand('~/path/to/z/z.sh')
+let teleport#path = expand('~/path/to/z/z.sh')
 ```
 
 Where `~/path/to/z/z.sh` is replaced with the actual file path.
@@ -71,7 +71,7 @@ There's also a lua-based implementation of `z`. Configuration is nearly
 identical. Just put this in your vimrc:
 
 ```viml
-let zcd#path = expand('~/path/to/z.lua/z.lua')
+let teleport#path = expand('~/path/to/z.lua/z.lua')
 ```
 
 Where `~/path/to/z.lua/z.lua` is the actual file path, wherever you installed

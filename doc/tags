@@ -1,6 +1,7 @@
 teleport#api#find_match()	teleport.txt	/*teleport#api#find_match()*
 teleport#api#find_matches()	teleport.txt	/*teleport#api#find_matches()*
 teleport#api#query()	teleport.txt	/*teleport#api#query()*
+teleport#path	teleport.txt	/*teleport#path*
 teleport-changelog	teleport.txt	/*teleport-changelog*
 teleport-config	teleport.txt	/*teleport-config*
 teleport-functions	teleport.txt	/*teleport-functions*
@@ -11,5 +12,4 @@ z.sh	teleport.txt	/*z.sh*
 z.vim	teleport.txt	/*z.vim*
 zcd#FindMatches()	teleport.txt	/*zcd#FindMatches()*
 zcd#driver	teleport.txt	/*zcd#driver*
-zcd#path	teleport.txt	/*zcd#path*
 zoxide	teleport.txt	/*zoxide*
