@@ -185,7 +185,7 @@ Changed:
 Added:
 - New |teleport#update_cwd| option.
 
-0.6.0 - UNRELEASED~
+0.6.0 - June 19, 2020~
 
 Added:
 - Experimental autojump support.
