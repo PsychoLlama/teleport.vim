@@ -80,6 +80,13 @@ it.
 ### [zoxide](https://github.com/ajeetdsouza/zoxide)
 Zoxide is automatically detected - you don't have to do anything.
 
+### [autojump](https://github.com/wting/autojump)
+In order to get the `j` alias, you're probably sourcing an autojump file in
+your bash/zsh/fish setup. Find that file and set it in your vimrc:
+```viml
+let teleport#path = expand('~/path/to/autojump.sh')
+```
+
 ### Setting the integration
 If you have more than one of these installed (why???) there's a chance
 `teleport.vim` could choose the wrong one. You can force it to use
@@ -89,6 +96,7 @@ a particular driver by setting `teleport#driver`.
 let teleport#driver = 'z' " rupa/z
 let teleport#driver = 'z.lua' " skywind3000/z.lua
 let teleport#driver = 'zoxide' " ajeetdsouza/zoxide
+let teleport#driver = 'autojump' " wting/autojump
 ```
 
 If you don't see your favorite program listed here, feel free to [open

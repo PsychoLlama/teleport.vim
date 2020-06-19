@@ -3,7 +3,7 @@
 Author:        Jesse Gibson <JesseTheGibson@gmail.com>
 Homepage:      https://github.com/PsychoLlama/teleport.vim
 License:       MIT
-Tags:          *z.sh* *zoxide* *z.lua* *z.vim* (old plugin name)
+Tags:          *z.sh* *zoxide* *z.lua* *autojump* *z.vim* (old plugin name)
 
 
     Press `gO` to show a table of contents.
@@ -17,6 +17,7 @@ If you're using this plugin, chances are you've installed one of these tools:
 - https://github.com/rupa/z
 - https://github.com/skywind3000/z.lua
 - https://github.com/ajeetdsouza/zoxide
+- https://github.com/wting/autojump
 
 They all do pretty much the same thing: they learn your most common
 directories, and when given a pattern, they jump to the most likely match.
@@ -59,6 +60,7 @@ These are your options:
 - `z`
 - `z.lua`
 - `zoxide`
+- `autojump`
 
 rupa/z~
 >
@@ -74,6 +76,11 @@ zoxide~
 >
   " Uses the global command "zoxide".
   let teleport#driver = 'zoxide'
+<
+autojump~
+>
+  let teleport#path = expand('~/path/to/autojump.sh')
+  let telport#driver = 'autojump'
 <
 ------------------------------------------------------------------------------
 OPTIONS                                                       *teleport-options*
@@ -177,6 +184,11 @@ Changed:
 
 Added:
 - New |teleport#update_cwd| option.
+
+0.6.0 - UNRELEASED~
+
+Added:
+- Experimental autojump support.
 
 ==============================================================================
 vim: ft=help tw=78:

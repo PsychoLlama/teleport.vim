@@ -7,6 +7,7 @@ let s:drivers = {}
 let s:drivers.z = teleport#drivers#rupaz#()
 let s:drivers['z.lua'] = teleport#drivers#zlua#()
 let s:drivers.zoxide = teleport#drivers#zoxide#()
+let s:drivers.autojump = teleport#drivers#autojump#()
 let s:drivers.test = teleport#drivers#test#()
 
 func! s:get_driver_setting() abort
