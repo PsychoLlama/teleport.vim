@@ -1,5 +1,5 @@
 # teleport.vim
-Vim + [z](https://github.com/rupa/z) = lightning fast navigation
+Navigate faster with [frecency](https://en.wikipedia.org/wiki/Frecency).
 
 <p align="center">
   <img alt="demo: navigating the file system with teleport.vim" src="https://raw.githubusercontent.com/PsychoLlama/teleport.vim/master/assets/demo.gif" width="500" />
