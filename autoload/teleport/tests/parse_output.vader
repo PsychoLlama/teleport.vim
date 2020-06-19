@@ -1,3 +1,4 @@
+### rupa/z
 Execute (returns a list):
   let output = teleport#parse_output#z([])
   silent AssertEqual v:t_list, type(output)
@@ -27,7 +28,7 @@ Execute (orders the output by frecency):
 # common: /some/file/path
 # That information is already obvious from frecency.
 Execute (ignores suggestions for common directories):
-  let output = teleport#parse_output#z( [
+  let output = teleport#parse_output#z([
     \   'common:    /first/file',
     \   '0.555      /second/file',
     \   '555.123    /first/file',
@@ -35,3 +36,26 @@ Execute (ignores suggestions for common directories):
 
   silent AssertEqual 2, len(output)
   silent AssertEqual '/first/file', output[0].directory
+
+### autojump
+Execute (removes duplicates):
+  let output = teleport#parse_output#autojump('prefix', [
+    \   'prefix__1__/path/to/duplicate',
+    \   'prefix__2__/path/to/duplicate',
+    \   'prefix__3__/path/to/duplicate',
+    \ ])
+
+  AssertEqual [{ 'frecency': 1.0, 'directory': '/path/to/duplicate' }], output
+
+Execute (removes intermingled duplicates):
+  let output = teleport#parse_output#autojump('prefix', [
+  \   'prefix__1__/first',
+  \   'prefix__2__/second',
+  \   'prefix__3__/first',
+  \   'prefix__4__/third',
+  \ ])
+
+  let expected = [{ 'frecency': 3.0, 'directory': '/first' }]
+  call add(expected, { 'frecency': 2.0, 'directory': '/second' })
+  call add(expected, { 'frecency': 1.0, 'directory': '/third' })
+  AssertEqual expected, output
