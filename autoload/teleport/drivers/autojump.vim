@@ -1,7 +1,13 @@
 let s:autojump = { 'name': 'autojump' }
 
 func! s:autojump.is_supported() abort
-  return executable('autojump') && exists('g:teleport#path')
+  if !executable('autojump') || !exists('g:teleport#path')
+    return 0
+  endif
+
+  let l:path_matches = fnamemodify(g:teleport#path, ':t') is# 'autojump.sh'
+  let l:explicitly_set_driver = get(g:, 'teleport#driver', v:null) is# 'autojump'
+  return l:path_matches || l:explicitly_set_driver
 endfunc
 
 func! s:autojump.query(search_term) abort
