@@ -1,9 +1,12 @@
-# teleport.vim
-Navigate faster with [frecency](https://en.wikipedia.org/wiki/Frecency).
-
-<p align="center">
-  <img alt="demo: navigating the file system with teleport.vim" src="https://raw.githubusercontent.com/PsychoLlama/teleport.vim/master/assets/demo.gif" width="500" />
-</p>
+<div>
+  <h1 align="center">teleport.vim</h1>
+  <p align="center">
+    <a href="https://travis-ci.org/github/PsychoLlama/z.vim">
+      <img align="center" alt="Travis CI Build Status" src="https://img.shields.io/travis/PsychoLlama/z.vim/master?label=Travis%20CI&style=flat-square">
+    </a>
+  </p>
+  <p align="center">Navigate faster with <a href="https://en.wikipedia.org/wiki/Frecency">frecency</a>.<p>
+</div>
 
 ## Purpose
 If you're reading this, you probably use [`z`](https://github.com/rupa/z)
