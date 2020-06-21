@@ -3,7 +3,14 @@ Before:
   unlet! teleport#path
   unlet! $ZSH
 
-  let fixtures = simplify(finddir('teleport.vim', '.;') . '/fixtures')
+  let root = finddir('teleport.vim', '.;')
+
+  " An old plugin name. Travis CI didn't notice the rename.
+  if empty(root)
+    let root = finddir('z.vim', '.;')
+  endif
+
+  let fixtures = simplify(root . '/fixtures')
 
 Execute (automatic resolution to OMZ framework):
   AssertEqual v:false, teleport#drivers#rupaz#().is_supported()
