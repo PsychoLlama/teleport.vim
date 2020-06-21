@@ -9,33 +9,26 @@
 </div>
 
 ## Purpose
-If you're reading this, you probably use [`z`](https://github.com/rupa/z)
-to jump around your file system. It's a magical experience, and probably
-one of my favorite CLI tools. If you don't use it, I highly recommend
-checking it out, even without this plugin.
-
-It's a critical part of my CLI workflow, and I wanted that same magic for vim.
-
-Say you've got a project named `drone-security-guard/`. Normally to reach
-this project you'd write
-
-```sh
-$ z drone
-```
-
-and it figures out what you mean and jumps into the directory. This plugin
-works much the same:
+Teleport.vim integrates with programs like [`z`](https://github.com/rupa/z)
+and [`autojump`](https://github.com/wting/autojump) to provide the same
+navigational magic inside Vim.
 
 ```viml
-:Z drone
+:pwd " ./projects/app-name
+:Z dotf
+:pwd " ~/dotfiles
 ```
 
-The command above will open the `drone-security-guard/` directory using
-whatever directory browser you've got configured.
+If those programs don't sound familiar, **here's the 30-second pitch:**  
+There's a competing set of command line tools that do pretty much the same
+thing. They alias `cd`, remember your most common directories, and let you
+jump ("teleport") to that directory by passing a substring. It'll filter the
+directories by your search term and jump to the one which is most
+[frecent](https://en.wikipedia.org/wiki/Frecency).
 
-> **Note:** I use [netrw](https://shapeshed.com/vim-netrw/) for navigation
-  because it's awesome. This should work for NERDTree too, but I never test
-  against it.
+If you aren't using something like that, stop what you're doing, forget this
+vim plugin, and just install the CLI tool. It's a _massive_ productivity
+boost. I recommend [`zoxide`](https://github.com/ajeetdsouza/zoxide).
 
 ## Installation
 [**vim-plug**](https://github.com/junegunn/vim-plug)
