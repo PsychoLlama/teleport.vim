@@ -190,5 +190,11 @@ Added:
 Added:
 - Experimental autojump support.
 
+0.7.0 - July 8, 2020 ~
+
+Added:
+- Command completion for the zoxide driver (requires zoxide@>=0.4.2).
+- Real frecency values in the zoxide programmatic API (requires zoxide@>=0.4.2).
+
 ==============================================================================
 vim: ft=help tw=78:
