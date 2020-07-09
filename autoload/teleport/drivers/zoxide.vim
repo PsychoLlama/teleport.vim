@@ -5,18 +5,15 @@ func! s:zoxide.is_supported() abort
   return executable('zoxide')
 endfunc
 
-func! s:zoxide.query(...) abort
-  let l:substrings = copy(a:000)
-  call map(l:substrings, 'fnameescape(v:val)')
-
-  let [l:result] = systemlist('zoxide query ' . join(l:substrings, ' '))
+func! s:zoxide.query(search) abort
+  let l:search_term = fnameescape(a:search)
+  let l:output = systemlist('zoxide query --list --score ' . l:search_term)
 
   if v:shell_error
     return []
   endif
 
-  " TODO: Support multiple results when '--score' ships (4b5f2e7)
-  return [{ 'frecency': -1, 'directory': l:result }]
+  return teleport#parse_output#zoxide(l:output)
 endfunc
 
 func! teleport#drivers#zoxide#() abort
