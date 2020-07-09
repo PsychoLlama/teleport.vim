@@ -55,6 +55,22 @@ func! teleport#parse_output#autojump(search_term, output) abort
   return l:results
 endfunc
 
+" Sample output:
+"    5 /path/to/closest-match
+"    3 /path/to/possible-match
+"    3 /path/to/other-possible-match
+"    0 /path/to/lower-probability-match
+func! teleport#parse_output#zoxide(output) abort
+  let l:results = []
+
+  for l:line in a:output
+    let [l:frecency, l:directory] = matchlist(l:line, '\v\s*(\d+)\s+(.*)$')[1:2]
+    call add(l:results, { 'frecency': str2float(l:frecency), 'directory': l:directory })
+  endfor
+
+  return l:results
+endfunc
+
 func! s:order_by_directory_name(first, second) abort
   if a:first.directory is# a:second.directory
     return 0

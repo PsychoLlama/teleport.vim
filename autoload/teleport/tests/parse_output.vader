@@ -59,3 +59,23 @@ Execute (removes intermingled duplicates):
   call add(expected, { 'frecency': 2.0, 'directory': '/second' })
   call add(expected, { 'frecency': 1.0, 'directory': '/third' })
   AssertEqual expected, output
+
+### zoxide
+Execute (parses out the score):
+  let output = teleport#parse_output#zoxide([
+  \   '   3 /first',
+  \   '   2 /second',
+  \   '   2 /third',
+  \   '   0 /fourth',
+  \ ])
+
+  let expected = [{ 'frecency': 3.0, 'directory': '/first' }]
+  call add(expected, { 'frecency': 2.0, 'directory': '/second' })
+  call add(expected, { 'frecency': 2.0, 'directory': '/third' })
+  call add(expected, { 'frecency': 0.0, 'directory': '/fourth' })
+  AssertEqual expected, output
+
+Execute (returns an empty list when no results are found):
+  let output = teleport#parse_output#zoxide([])
+
+  AssertEqual [], output
