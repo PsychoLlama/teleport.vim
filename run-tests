@@ -19,4 +19,4 @@ if ! command -v nvim; then
   cmd=vim
 fi
 
-"$cmd" -Nu <(echo "$vimrc") -c 'Vader! **/*.vader'
+"$cmd" -EsNu <(echo "$vimrc") -c 'Vader! **/*.vader'
