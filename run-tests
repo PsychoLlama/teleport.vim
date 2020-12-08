@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+vader_path=../vader.vim
+
+if [[ ! -d "$vader_path" ]]; then
+  git clone --depth=1 https://github.com/junegunn/vader.vim.git "$vader_path"
+fi
+
+vimrc="
+filetype off
+set rtp+=$vader_path
+set rtp+=.
+set rtp+=after
+filetype plugin indent on
+syntax enable
+"
+
+cmd=nvim
+if ! command -v nvim; then
+  cmd=vim
+fi
+
+"$cmd" -Nu <(echo "$vimrc") -c 'Vader! **/*.vader'

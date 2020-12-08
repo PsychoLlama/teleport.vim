@@ -1,0 +1,32 @@
+name: Test
+
+on:
+  pull_request:
+  push:
+    branches: [master]
+
+jobs:
+  test:
+    name: Test (neovim=${{ matrix.use_neovim }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        use_neovim: [true, false]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: rhysd/action-setup-vim@v1
+        name: Install Vim (neovim=${{ matrix.use_neovim }})
+        with:
+          neovim: ${{ matrix.use_neovim }}
+      - name: Vader
+        run: ./run-tests
+
+  lint:
+    runs-on: ubuntu-latest
+    name: Lint
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ludvighz/vint-action@v1
+        with:
+          path: ./
+          args: '--color'
