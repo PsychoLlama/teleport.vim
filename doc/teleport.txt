@@ -3,7 +3,7 @@
 Author:        Jesse Gibson <JesseTheGibson@gmail.com>
 Homepage:      https://github.com/PsychoLlama/teleport.vim
 License:       MIT
-Tags:          *z.sh* *zoxide* *z.lua* *autojump* *z.vim* (old plugin name)
+Tags:          *z.sh* *zoxide* *z.lua* *autojump*
 
 
     Press `gO` to show a table of contents.
@@ -190,11 +190,16 @@ Added:
 Added:
 - Experimental autojump support.
 
-0.7.0 - July 8, 2020 ~
+0.7.0 - July 8, 2020~
 
 Added:
 - Command completion for the zoxide driver (requires zoxide@>=0.4.2).
 - Real frecency values in the zoxide programmatic API (requires zoxide@>=0.4.2).
+
+0.8.0 - December 8, 2020~
+
+Removed:
+- The deprecated `zcd#FindMatches(...)` API has been removed.
 
 ==============================================================================
 vim: ft=help tw=78:
