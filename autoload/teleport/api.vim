@@ -17,7 +17,7 @@ endfunc
 " Treat well-known symbols specially (e.g. '~' or '%:h').
 " Possible feature: expand environment variables before calling the driver.
 func! teleport#api#query(search_term) abort
-  let l:trimmed_search = trim(a:search_term)
+  let l:trimmed_search = s:trim(a:search_term)
   if l:trimmed_search is# '~' || l:trimmed_search[0] is# '%'
     return expand(l:trimmed_search)
   endif
@@ -26,4 +26,10 @@ func! teleport#api#query(search_term) abort
   if l:result is# 'ERROR' | return 'ERROR' | endif
 
   return l:result is# v:null ? v:null : l:result.directory
+endfunc
+
+" Older versions of vim don't support the `trim(...)` function.
+func! s:trim(text) abort
+  let l:trim_start = substitute(a:text, '\v^\s*', '', '')
+  return substitute(l:trim_start, '\v\s*$', '', '')
 endfunc

@@ -34,7 +34,7 @@ Execute (return first result on directory query):
   AssertEqual result.directory, teleport#api#query('search-term')
 
 Execute (resolve special symbols with odd whitespace):
-  AssertEqual $HOME, teleport#api#query("\n\t ~ \t\n")
+  AssertEqual $HOME, teleport#api#query(" \t ~ \t ")
 
 Execute (no explosion with empty search term):
   let result = { 'directory': '/dir', 'frecency': 1 }

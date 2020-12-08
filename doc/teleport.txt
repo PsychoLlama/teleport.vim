@@ -198,6 +198,9 @@ Added:
 
 0.8.0 - December 8, 2020~
 
+Fixed:
+- Removed dependence on native `trim(...)` (not available in vim@<8.2).
+
 Removed:
 - The deprecated `zcd#FindMatches(...)` API has been removed.
 
