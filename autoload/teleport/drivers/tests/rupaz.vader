@@ -1,7 +1,7 @@
 Before:
   unlet! teleport#driver
   unlet! teleport#path
-  unlet! $ZSH
+  let $ZSH = ''
 
   let root = finddir('teleport.vim', '.;')
 
