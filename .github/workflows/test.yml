@@ -18,8 +18,9 @@ jobs:
         name: Install Vim (neovim=${{ matrix.use_neovim }})
         with:
           neovim: ${{ matrix.use_neovim }}
-      - name: Vader
-        run: ./run-tests
+      - uses: PsychoLlama/vader-action@v1
+        with:
+          neovim: ${{ matrix.use_neovim }}
 
   lint:
     runs-on: ubuntu-latest
