@@ -9,6 +9,7 @@
 </div>
 
 ## Purpose
+
 Teleport.vim integrates with programs like [`z`](https://github.com/rupa/z)
 and [`autojump`](https://github.com/wting/autojump) to provide the same
 navigational magic inside Vim.
@@ -31,25 +32,31 @@ vim plugin, and just install the CLI tool. It's a _massive_ productivity
 boost. I recommend [`zoxide`](https://github.com/ajeetdsouza/zoxide).
 
 ## Installation
+
 [**vim-plug**](https://github.com/junegunn/vim-plug)
+
 ```viml
 Plug 'PsychoLlama/teleport.vim'
 ```
 
 [**Vundle**](https://github.com/VundleVim/Vundle.vim)
+
 ```viml
 Plugin 'PsychoLlama/teleport.vim'
 ```
 
 [**Pathogen**](https://github.com/tpope/vim-pathogen)
+
 ```sh
 git clone https://github.com/PsychoLlama/teleport.vim ~/.vim/bundle/teleport.vim
 ```
 
 ## Integrations
+
 `teleport.vim` is compatible with several different implementations.
 
 ### [rupa/z](https://github.com/rupa/z)
+
 If you use the [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
 framework, `teleport.vim` will work out of the box. You're good to go :rocket:
 
@@ -63,6 +70,7 @@ let teleport#path = expand('~/path/to/z/z.sh')
 Where `~/path/to/z/z.sh` is replaced with the actual file path.
 
 ### [z.lua](https://github.com/skywind3000/z.lua)
+
 There's also a lua-based implementation of `z`. Configuration is nearly
 identical. Just put this in your vimrc:
 
@@ -74,16 +82,20 @@ Where `~/path/to/z.lua/z.lua` is the actual file path, wherever you installed
 it.
 
 ### [zoxide](https://github.com/ajeetdsouza/zoxide)
+
 Zoxide is automatically detected - you don't have to do anything.
 
 ### [autojump](https://github.com/wting/autojump)
+
 In order to get the `j` alias, you're probably sourcing an autojump file in
 your bash/zsh/fish setup. Find that file and set it in your vimrc:
+
 ```viml
 let teleport#path = expand('~/path/to/autojump.sh')
 ```
 
 ### Setting the integration
+
 If you have more than one of these installed (why???) there's a chance
 `teleport.vim` could choose the wrong one. You can force it to use
 a particular driver by setting `teleport#driver`.
@@ -99,6 +111,7 @@ If you don't see your favorite program listed here, feel free to [open
 a request!](https://github.com/PsychoLlama/teleport.vim/issues/new?title=%5BRequest%5D%20New%20Integration&body=Can%20haz%20%3Cplugin%3E%20integration%3F)
 
 ## Documentation
+
 In traditional vim fashion, the documentation is kept in a help page.
 After installing the plugin, run:
 

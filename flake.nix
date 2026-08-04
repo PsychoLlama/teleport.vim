@@ -57,6 +57,7 @@
           default = pkgs.mkShell {
             packages = [
               pkgs.nixfmt
+              pkgs.prettier
               pkgs.treefmt
             ];
           };
