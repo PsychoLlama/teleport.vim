@@ -1,8 +1,8 @@
 <div>
   <h1 align="center">teleport.vim</h1>
   <p align="center">
-    <a href="https://github.com/PsychoLlama/teleport.vim/actions?query=workflow%3ATest">
-      <img align="center" alt="Build Status" src="https://img.shields.io/github/workflow/status/PsychoLlama/teleport.vim/Test/master?style=flat-square">
+    <a href="https://github.com/PsychoLlama/teleport.vim/actions/workflows/test.yml">
+      <img align="center" alt="Build Status" src="https://github.com/PsychoLlama/teleport.vim/actions/workflows/test.yml/badge.svg?branch=master">
     </a>
   </p>
   <p align="center">Navigate faster with <a href="https://en.wikipedia.org/wiki/Frecency">frecency</a>.<p>
